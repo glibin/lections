@@ -1,0 +1,435 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Школа программистов HH - Backbone</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/print.css" media="print">
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+	<!--
+		To apply styles to the certain slides
+		set slide ID to get needed elements
+		-->
+	<style>
+		#Sugar h2 {
+			margin:65px 0 0;
+			color:#FFF;
+			text-align:center;
+            font-size: 70px;
+            text-shadow: 1px 1px 1px gray;
+			}
+        #Sugar, #You {
+            background-color: white;
+        }
+
+		#Picture h2 {
+			color:#FFF;
+			}
+
+        .caption h1 {
+            color: white;
+            text-shadow: none;/*0 1px 1px darkgray;*/
+        }
+
+        .caption p, .list .caption a {
+            color: white;
+        }
+
+        .slide pre code {
+            line-height: 45px;
+        }
+
+        .slide pre.smaller code {
+            line-height: 35px;
+        }
+
+        .slide pre.x-smaller code {
+            line-height: 25px;
+            font-size: 80%;
+        }
+
+        .slide p.note {
+            text-align: right;
+        }
+
+        .slide-nopage:after {
+            content: "";
+        }
+
+        table.tbl {
+            margin: 0;
+            padding: 0;
+            margin-top: -40px;
+        }
+
+        table.tbl td {
+            margin: 0;
+            padding: 3px;
+            line-height: 25px;
+        }
+
+        table.tbl th {
+            border-bottom: 1px solid gray;
+        }
+
+        table.tbl tr {
+            margin: 0;
+            padding: 0;
+        }
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Backbone JS</h1>
+		<p><a href="http://glibin.ru/">Виталий Глибин</a>, <a href="http://hh.ru">front-end разработчик в HeadHunter</a></p>
+	</header>
+    <section class="slide cover" style="background-image: url(pictures/backbone.png); background-repeat: no-repeat; background-position: center center; background-color: white;"><div>
+        <p class="note"><a href="http://backbonejs.org/">http://backbonejs.org/</a></p>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Backbone JS</h2>
+        <ul>
+            <li>MVC библиотека (не фреймворк!)</li>            
+            <li>Избегается "two way data-binding" (как в ember.js, angular.js или knockoutJS).</li>
+            <li>Нет зависимой логики приложения в HTML (встроенный JS, хуки в data- или ng-атрибутах)</li>
+            <li>Свобода выбора шаблонизатора</li>
+            <li>6.5kb gzipped</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Из чего состоит</h2>
+        <ul>
+            <li>Backbone.Events</li>            
+            <li>Backbone.Model</li>
+            <li>Backbone.Collection</li>
+            <li>Backbone.View</li>
+            <li>Backbone.Router / Backbone.history</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Backbone.Events</h2>
+        <ul>
+            <li>Mixin для любого объекта, позволяющий ему работать с произвольными событиями</li>
+            <li>Встроен в Model, Collection, View, Router</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Backbone.Events</h2>
+        <pre> 
+            <code>var object = {};</code>
+            <code>_.extend(object, Backbone.Events);</code>
+            <code>object.on("alert", function(msg) {</code>
+            <code>  alert("Triggered " + msg);</code>
+            <code>}</code>
+            <code>object.trigger("alert", "an event");</code>
+        </pre> 
+    </div></section>
+    <section class="slide"><div>
+        <h2>Каталог встроенных событий</h2>
+        <ul>
+            <li>add, remove, change, change:[attribute], destroy, invalid</li>
+            <li>request, sync, error</li>
+            <li>route, route:[name]</li>
+            <li>all или *</li>            
+        </ul>
+        <p class="note"><a href="http://backbonejs.org/#Events-catalog">http://backbonejs.org/#Events-catalog</a></p>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Backbone.Model</h2>
+        <ul>
+            <li>Как и любая модель, содержит данные и обширную логику по работе с ней</li>
+            <li>Вызов событий при изменениях (через Backbone.Events)</li>
+            <li>Валидация</li>
+            <li>CRUD</li>
+        </ul>
+    </div></section>
+     <section class="slide"><div>
+        <h2>Backbone.Model</h2>
+        <pre>
+            <code>var Comment = Backbone.Model.extend({</code>
+            <code>    defaults: {</code>
+            <code>        'text': 'Awesome!'</code>
+            <code>    }</code>
+            <code>});</code>
+            <code>var comment = new Comment;</code>
+            <code>alert(comment.get('text')); // Awesome!</code>
+        </pre> 
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Model / events</h2>
+        <pre>
+            <code>comment.on('change:text', function(model, value) {</code>
+            <code>    alert(value);</code>
+            <code>});</code>
+            <code>comment.set({'text': 'Awful!'}); // alert('Awful!')</code>
+            <code>comment.set({'text': 'Fantastic!'},</code>
+            <code>            {silent: true}); // nothing</code>
+            <code>alert(comment.get('text')); // Fantastic!</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Model / validation</h2>
+        <pre>
+            <code>var Comment = Backbone.Model.extend({</code>
+            <code>  validate: function(attrs, options) { </code>
+            <code>      if (attrs.text.length &lt; 140) {</code>
+            <code>          return "Comment is too small";</code>
+            <code>      }</code>
+            <code>  }</code>
+            <code>});</code>
+            <code>var comment = new Comment;</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Model / validation</h2>
+        <pre>
+            <code>comment.on('invalid', function(model, error, opts) {</code>
+            <code>  alert(error); // Comment is too small</code>
+            <code>});</code>
+            <code>comment.set({'text': 'Awful!'}, {'validate': true});</code>
+            <code>comment.set({'text': 'Awesome!'});</code>
+            <code>if (!comment.isValid()) { // calls validate method</code>
+                <code>  alert(comment.validationError); // Comment is too small</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Model / CRUD</h2>
+        <pre>
+            <code>var Comment = Backbone.Model.extend({</code>
+            <code>  urlRoot: '/comments' // [urlRoot]/id</code>
+            <code>});</code>
+            <code>var comment = new Comment;</code>
+            <code>alert(comment.url()); // /comments</code>
+            <code>comment.save({'text': 'Awesome!'}, {</code>
+            <code>  success: function() {</code>
+            <code>      alert(comment.url()); // /comments/1 </code>
+            <code>  }});</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Маппинг HTTP-методов</h2>
+        <ul>
+            <li>Для сохранения новой модели (model.isNew()) - метод POST (create)</li>
+            <li>Для сохранения существующей модели - метод PUT (update)</li>
+            <li>Для получения (model.fetch()) - метод GET (read)</li>
+            <li>Для удаления (model.destroy()) - метод DELETE (delete)</li> 
+        </ul>
+        <p style="margin-top: -20px;">Чтобы дождаться ответа сервера перед изменением необходимо передать {wait: true}</p>
+    </div></section>
+    
+    <section class="slide"><div>
+        <h2>Что происходит при save</h2>
+        <ul>
+            <li>Вызывается validate (если есть). Если не проходит, то модель не сохраняется на сервер.</li>
+            <li>Изменение атрибутов и событие change (и change:*)</li>
+            <li>Событие request, когда начинается ajax-запрос</li>
+            <li>Событие sync, когда сервер успешно ответил</li>
+            <li>Событие error, когда не удалось сохранить модель на сервере</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Collection</h2>
+        <ul>
+            <li>Представляет собой упорядоченный набор моделей</li>
+            <li>Имеет свой набор событий (add, remove)</li>
+            <li>Все события модели также вызываются у коллекции</li>
+            <li>Есть метод fetch для получения коллекции с бекэнда</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Collection</h2>
+        <pre>
+            <code>var Library = Backbone.Collection.extend({
+  model: Book,
+  comparator: comparator
+});</code>
+        </pre>
+        <p>Атрибут model может быть и функцией, возвращающей новую модель.</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Collection / comparator</h2>
+        <ul>
+            <li>sortBy - функция, принимающая модель и возвращающая число или строку, по которой должна происходить сортировка.</li>
+            <li>sort - функция, которая принимает две модели и возвращает:
+                <ul>
+                    <li>-1, если первая модель должна быть перед второй</li>
+                    <li>1, если первая модель должна идти после второй </li>
+                    <li>0, если их порядок одинаков</li>
+                </ul>
+            </li>
+            <li>строка - атрибут модели, по которому необходимо производить сортировку</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Collection / comparator</h2>
+        <pre>
+<code>var Chapters = Backbone.Collection.extend({
+    comparator: 'page'
+});
+var chapters = new Chapters([
+    {page: 9, title: "The End"}, 
+    {page: 1, title: "The Beginning"}]);
+alert(chapters.pluck('page')); // 1,9
+</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>collection.add(models, [options])</h2>
+        <ul>
+            <li>Добавляет модель(и) в коллекцию, вызывая событие add для каждой модели</li>
+            <li>При передаче {at: index} позиционирует модель в коллекции по индексу index</li>
+            <li>При добавлении модели, которая уже есть в коллекции, она игнорируется, если не передать {merge: true}</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>collection.add(models, [options])</h2>
+        <pre>
+<code>var ships = new Backbone.Collection;
+ships.on("add", function(ship) {
+  alert("Ahoy " + ship.get("name") + "!");
+});
+ships.add([
+  {name: "Flying Dutchman"},
+  {name: "Black Pearl"}
+]);
+</code>
+</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>collection.set(models, [options])</h2>
+        <ul>
+            <li>Если модели нет в коллекции - выполняет ее добавление </li>
+            <li>Если модель уже есть в коллекции - выполняет ее обновление </li>
+            <li>Если коллекция содержит модели, которых нет в models, то они удаляются</li>
+        </ul>
+        <p style="margin-top: -20px;">Любое из вышеперечисленных действий может быть отменено флагами {add: false}, {remove: false} или {merge: false}</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>collection.reset(models, [options])</h2>
+        <p>Заменяет модели в коллекции новыми моделями models, вызывая событие reset.</p>
+        <p>Удобно использовать при первой инициализации.</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>collection.fetch([options])</h2>
+        <ul>
+            <li>Получает модели с backend'а</li>
+            <li>Использует set для обновления коллекции или reset, если передать {reset: true}</li>
+        </ul>
+        <pre><code>var accounts = new Backbone.Collection;
+accounts.url = '/accounts';
+accounts.fetch();</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.View</h2>
+        <ul>
+            <li>Представляет собой организационную структуру для UI</li>
+            <li>Может использоваться с любым JS шаблонизатором</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <pre><code>var DocumentRow = Backbone.View.extend({
+  tagName: "li",
+  className: "item-row",
+  events: {
+    "click .toggle"   : "toggleDone",
+    "dblclick .view"  : "edit",
+  },
+  initialize: function() {
+    this.listenTo(this.model, "change", this.render);
+  },
+  render: function() { ... }
+});</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>view.render()</h2>
+        <pre><code>var DocumentRow = Backbone.View.extend({
+    template: _.template($('#item-template').html()),
+    render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    },
+    edit: function() {
+      this.$el.addClass("editing");
+      this.$('.edit').focus();
+    }
+        </code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>_.template</h2>
+        <pre><code>&lt;script type="text/template" id="item-template"&gt;
+    &lt;div class="view"&gt;
+      &lt;input class="toggle" type="checkbox" 
+                &lt;%= done ? 'checked="checked"' : '' %&gt; /&gt;
+      &lt;label&gt;&lt;%- title %&gt;&lt;/label&gt;
+      &lt;a class="destroy"&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;input class="edit" type="text" value="&lt;%- title %&gt;" /&gt;
+  &lt;/script&gt;</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.Router</h2>
+        <p>Используется для организации роутинга клиентских страниц</p>
+        <pre style="margin-top: -40px;"><code>var Workspace = Backbone.Router.extend({
+  routes: {
+    "search/:query":  "search",  // #search/kiwis
+    "download/*path": "download" // #download/nested/folder/file.txt
+  }
+  search: function(query) { ... }
+});
+</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Backbone.history</h2>
+        
+        <pre><code>$(function(){
+  new WorkspaceRouter();
+  Backbone.history.start({pushState: true});
+});
+</code></pre>
+    </div></section>
+
+	<section class="slide"><div>
+		<h2>Backbone JS</h2>
+		<p>Виталий Глибин, HeadHunter</p>
+		<ul>
+			<li><a href="http://glibin.ru">glibin.ru</a></li>
+			<li><a href="mailto:glibin.v@gmail.com">glibin.v@gmail.com</a></li>
+		</ul>
+	</div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<!--<div class="progress"><div></div></div>-->
+	<script src="shower/shower.min.js"></script>
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+	<!-- Copyright © 2010–2013 Vadim Makeev — pepelsbey.net -->
+	<!-- Photos by John Carey — fiftyfootshadows.net -->
+</body>
+</html>

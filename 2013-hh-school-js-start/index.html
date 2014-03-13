@@ -1,0 +1,1317 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Школа программистов HH - JavaScript / лекция 1</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/print.css" media="print">
+	<!--
+		To apply styles to the certain slides
+		set slide ID to get needed elements
+		-->
+	<style>
+		#Sugar h2 {
+			margin:65px 0 0;
+			color:#FFF;
+			text-align:center;
+            font-size: 70px;
+            text-shadow: 1px 1px 1px gray;
+			}
+        #Sugar, #You {
+            background-color: white;
+        }
+
+		#Picture h2 {
+			color:#FFF;
+			}
+
+        .caption h1 {
+            color: white;
+            text-shadow: none;/*0 1px 1px darkgray;*/
+        }
+
+        .caption p, .list .caption a {
+            color: white;
+        }
+
+        .slide pre code {
+            line-height: 45px;
+        }
+
+        .slide pre.smaller code {
+            line-height: 35px;
+        }
+
+        .slide pre.x-smaller code {
+            line-height: 25px;
+            font-size: 80%;
+        }
+
+        .slide p.note {
+            text-align: right;
+        }
+
+        .slide-nopage:after {
+            content: "";
+        }
+
+        table.tbl {
+            margin: 0;
+            padding: 0;
+            margin-top: -40px;
+        }
+
+        table.tbl td {
+            margin: 0;
+            padding: 3px;
+            line-height: 25px;
+        }
+
+        table.tbl th {
+            border-bottom: 1px solid gray;
+        }
+
+        table.tbl tr {
+            margin: 0;
+            padding: 0;
+        }
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>JavaScript / лекция 1</h1>
+		<p><a href="http://glibin.ru/">Виталий Глибин</a>, <a href="http://hh.ru">front-end разработчик в HeadHunter</a></p>
+	</header>
+    <section class="slide"><div>
+        <h2>Немного истории JavaScript</h2>
+        <ul>
+            <li>Первая версия вышла в 1995 году в Netscape Navigator 2.0</li>
+            <li>Изначально задумывался как язык для браузера</li>
+            <li>Сначала назывался LiveScript</li>
+            <li>Является товарным знаком Oracle Corporation (наследие Sun)</li>
+            <li>Основывается на стандарте ECMAScript</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Основные особенности</h2>
+        <ul>
+            <li>Виртуальная машина (Google v8, Mozilla SpiderMonkey, Rhino, Microsoft Chakra, Opera Carakan)</li>
+            <li>Неявная (утиная) типизация</li>
+            <li>Автоматическое приведение типов</li>
+            <li>Мультипарадигмальность</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Неявная (утиная) типизация</h2>
+        <p style="margin-bottom: 10px;">If it looks like a duck, swims like a duck and quacks like a duck, then it probably is a duck</p>
+        <img src="pictures/ducktyping.jpg" align="right" alt="">
+            <pre>
+            <code>var Duck = {</code>
+            <code>    looksLikeADuck: true,</code>
+            <code>    quacksLikeADuck: true,</code>
+            <code>    swimsLikeADuck: true</code>
+            <code>};</code>
+                </pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Автоматическое приведение типов</h2>
+        <pre>
+            <code>1 + "2" == "12"</code>
+            <code>1 + 2 == 3</code>
+            <code>1 + [] == "1"</code>
+            <code>1 + {} == "1[object Object]"</code>
+            <code>1 + (1,2,3) == 4 // приведения типов нет</code>
+            <code>0 == "0"</code>
+        </pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Мультипарадигмальность</h2>
+        <ul>
+            <li>Функциональный подход</li>
+            <li>Прототипный подход</li>
+            <li>Классовый подход</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Функциональный подход</h2>
+        <pre>
+            <code>var data = [1, 2, "xss", 3, "100500", "-5", "0x10"];</code>
+            <code>var result = data.<mark>map</mark>(function(item) { </code>
+            <code>     <b>return</b> parseInt(item);</code>
+            <code>})</code>
+            <code>.<mark>filter</mark>(function(item) { </code>
+            <code>  <b>return</b> !isNaN(item); </code>
+            <code>});</code>
+            <code>console.log(result); // [1, 2, 3, 100500, -5, 16]</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Функциональный подход</h2>
+        <pre>
+            <code>jQuery('div.container')</code>
+            <code>  .<mark>append</mark>('&lt;span&gt;Hello, world!&lt;/span&gt;')</code>
+            <code>  .<mark>addClass</mark>('hello')</code>
+            <code>  .<mark>find</mark>('span')</code>
+            <code>  .<mark>on</mark>('<b>click</b>', function() {</code>
+            <code>      alert('Hello!');</code>
+            <code>  });</code>
+        </pre>
+        <p class="note">jQuery (<a href="http://jquery.com/">http://jquery.com/</a>)</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Прототипный подход</h2>
+        <p>Отсутствует понятие класса, а наследование производится путем клонирования существующего объекта - <b>прототипа</b>.</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Прототипный подход</h2>
+        <pre class="smaller">
+            <code>var Animal = function(name) {</code>
+            <code>  this.name = name;</code>
+            <code>};</code>
+
+            <code>var Dog = function(name, breed) {</code>
+            <code>  <mark>Animal.call(this, name);</mark></code>
+            <code>  this.breed = breed;</code>
+            <code>}</code>
+
+            <code><mark>Dog.prototype = new Animal();</mark></code>
+
+            <code>var Jimmy = new Dog('Jim', 'rottweiler');</code>
+            <code>console.log(Jimmy.name, Jimmy.breed);</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Классов нет!<br><span style="font-size: 40%; color: #999;">Но если очень хочется...</span></h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <pre class="smaller">
+            <code>var Animal = new Class({</code>
+            <code>  <mark>initialize</mark>: function(name){</code>
+            <code>      this.name = name;</code>
+            <code>}});</code>
+
+            <code>var Dog = new Class({</code>
+            <code>  <mark>Extends</mark>: <strong>Animal</strong>,</code>
+            <code>  initialize: function(name, breed) {</code>
+            <code>      <mark>this.parent(name);</mark></code>
+            <code>      this.breed = breed;</code>
+            <code>  }</code>
+            <code>});</code>
+
+            <code>var Jimmy = new Dog('Jim', 'rottweiler');</code>
+            <code>console.log(Jimmy.name, Jimmy.breed);</code>
+        </pre>
+        <p class="note">MooTools (<a href="http://mootools.net">http://mootools.net</a>)</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>ECMAScript 6 (draft)</h2>
+        <pre class="smaller">
+
+            <code><mark>class</mark> Dog <mark>extends</mark> Animal {</code>
+            <code>  constructor(name, breed) {</code>
+            <code>      <mark>super</mark>(name);</code>
+            <code>      this.breed = breed;</code>
+            <code>  }</code>
+            <code>}</code>
+            <code>var Jimmy = new Dog('Jim', 'rottweiler');</code>
+            <code>console.log(Jimmy.name, Jimmy.breed);</code>
+        </pre>
+    </div></section>
+
+	<section class="slide cover" id="Sugar"><div>
+		<h2>Но все это не более, чем<br>синтаксический сахар</h2>
+        <h2>JavaScript &mdash; прототипно-ориентированный язык</h2>
+		<img src="pictures/sugar.jpg" alt="">
+	</div></section>
+
+    <section class="slide cover" id="You"><div>
+        <img src="pictures/you.jpg" alt="" style="max-width: 50%;">
+        <ul style="margin-left: 50%;">
+            <li>Низкий порог входа (браузер + блокнот)</li>
+            <li>Есть на сервере (Node.js, Rhino)</li>
+            <li>И даже в БД (PostgreSQL)</li>
+            <li>И даже в MS Ofice, Adobe PDF, OpenOffice</li>
+            <li>TIOBE Index – 10</li>
+            <li>№1 на Github (21%)</li>
+            <li>100500 библиотек для всего (видео, аудио, 2D, 3D, RIA)</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Базовые типы</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Базовые типы</h2>
+        <ul>
+            <li>Примитивы</li>
+            <li>Объекты</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Примитивы</h2>
+        <ul>
+            <li>Строки: <code>"abc"</code>, <code>"124"</code> (внутренняя кодировка: unicode)<sup>*</sup></li>
+            <li>Числа: <code>123</code>, <code>3.14</code>, <code>1e5</code> (все числа в JS - с плавающей точкой)</li>
+            <li>Булевы: литералы <code>true</code> и <code>false</code></li>
+            <li><code>undefined</code> ("не определено"): все переменные без значения</li>
+            <li><code>null</code> ("пусто", "ничто"): единственное значение - null</li>
+        </ul>
+        <p class="note"><sup>*</sup><a href="http://mathiasbynens.be/notes/javascript-encoding">http://mathiasbynens.be/notes/javascript-encoding</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Примитивы</h2>
+        <pre>
+            <code>typeof "foo"; // "string"</code>
+            <code>typeof 0; // "number" (`typeof NaN` - "number")</code>
+            <code>typeof true; // "boolean"</code>
+            <code>typeof undefined; // "undefined"</code>
+            <code>typeof null; // "<mark>object</mark>"</code>    
+        </pre>
+        <p class="note"><a href="http://www.adequatelygood.com/Object-to-Primitive-Conversions-in-JavaScript.html">http://www.adequatelygood.com/Object-to-Primitive-Conversions-in-JavaScript.html</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Объекты</h2>
+        <ul>
+            <li>Объект: <code>new Object()</code> или <code>{}</code></li>
+            <li>Обертки (врапперы) для примитивов: <code>Boolean</code>, <code>Number</code>, <code>String</code></li>
+            <li>Массив: <code>new Array()</code> или <code>[]</code></li>
+            <li>Функция: <code>new Function()</code> или <code>function() {}</code></li>
+            <li>Регулярное выражение: <code>new RegExp("\\s*")</code> или <code>/\s*/</code></li>
+            <li>Дата: <code>new Date()</code></li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Основные отличия</h2>
+        <ul>
+            <li>Примитивы неизменны (immutable) - любое изменение игнорируется:
+                <pre style="margin-left: 105px;">
+                    <code>var str = "abc";</code>
+                    <code>str.foo = 123;</code>
+                    <code>console.log(str.foo); // undefined</code>
+                </pre>
+            </li>
+            <li>Примитивы сравниваются по значению
+                <pre style="margin-left: 105px;">
+                    <code>"abc" === "abc" // true</code>
+                </pre>
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Основные отличия</h2>
+        <ul>
+            <li>Объекты изменяемы (mutable) по своей природе:
+                <pre style="margin-left: 105px; margin-bottom: 10px;">
+                    <code>var obj = {};</code>
+                    <code>obj.foo = 123;</code>
+                    <code>console.log(obj.foo); // 123</code>
+                </pre>
+            </li>
+            <li>Объекты сравниваются по ссылке:
+                <pre style="margin-left: 105px;">
+                    <code>{} === {} // false</code>
+                    <code>var obj = {};</code>
+                    <code>obj === obj; // true</code>
+                </pre>
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Основные отличия</h2>
+        <ul>
+            <li>Переменные хранят ссылки на объекты:
+                <pre style="margin-left: 105px; margin-bottom: 10px;">
+                    <code>var var1 = {};</code>
+                    <code>var var2 = var1;</code>
+                    <code>var1.foo = 123;</code>
+                    <code>console.log(var2.foo); // 123</code>
+                </pre>
+            </li>
+            <li>С примитивами можно работать как с объектами:
+                <pre style="margin-left: 105px; margin-bottom: 10px;">
+                    <code>"abc".length; // 3</code>
+                    <code>(12.149).toFixed(2); // "12.15" - строка</code>
+                </pre>
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Number</h2>
+        <ul>
+            <li>Все числа с плавающей точкой</li>
+            <li>Различная запись: <code>105</code>, <code>0x10</code>, <code>010</code>, <code>1e5</code></li>
+            <li>NaN: не число <code>parseInt("test"); // NaN, Not A Number</code></li>
+            <li>Infinity: бесконечность <code>1/0; // Infinity</code></li>
+            <li>Объект Math: <code>Math.PI</code>, <code>Math.sin</code>, <code>Math.random</code>, ...</li>
+            <li><code>isNaN()</code>, <code>isFinite()</code>
+            <pre style="margin-left: 105px; margin-bottom: 10px;">
+                <code>parseInt("asd") == NaN // false</code>
+                <code>isNaN(parseInt("asd")) // true</code>
+            </pre>
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Приведение к числу</h2>
+        <ul>
+            <li>parseInt(&lt;значение&gt;, &lt;основание&gt;)
+                <pre style="margin-left: 105px; margin-bottom: 10px;">
+                <code>parseInt("b"); // NaN</code>
+                <code>parseInt("b", 16); // 11</code>
+                <code>parseInt("0101", 2); // 5</code>
+                <code>parseInt("10abc"); // 10</code>
+                </pre>
+            </li>
+            <li>parseFloat(&lt;строка&gt;):
+                    <code>parseFloat("123.12"); // 123.12</code>
+            </li>
+            <li><code>+"100500"; // 100500</code>, использует внутренний ToNumber() <a href="http://es5.github.com/#x9.3">http://es5.github.com/#x9.3</a>, <a href="http://javascript.ru/ecma/part9">http://javascript.ru/ecma/part9</a></li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Object</h2>
+        <ul>
+            <li>Hash, имена полей могут быть строками или числами</li>
+            <li>Является <strong>прототипом</strong> для других объектов</li>
+            <li>Динамическое изменение полей (mutable)</li>
+            <li><code>null</code> - нулевой (несуществующий) объект</li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Object</h2>
+        <pre>
+            <code>var obj = {</code>
+            <code>  b: "123",</code>
+            <code>  "c++": function() { return 1; },</code>
+            <code>};</code>
+            <code>obj.b; // "123"</code>
+            <code>obj['c++'](); // 1</code>
+            <code>obj[1] = 10;</code>
+            <code>obj[1]; // 10</code>
+            <code>obj['1']; // 10</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Function</h2>
+        <ul>
+            <li>Вызываемый Object</li>
+            <li>Можно добавлять любые свойства (как у объекта)</li>
+            <li>First-class functions</li>
+            <li>Отсутствует проверка на число аргументов</li>
+            <li>Создает область видимости (scope)</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Пример</h2>
+        <pre>
+            <code>square(2); // Works!</code>
+            <code>function square(arg) { // Named function</code>
+            <code>  return arg * arg;</code>
+            <code>}</code>
+            <code>square.length; // ??</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Еще пример</h2>
+        <pre>
+            <code>square(2); // Error</code>
+            <code>var square = function(arg) {</code>
+            <code>  return arg * arg</code>
+            <code>}</code>
+            <code>square(2); // ok</code>
+            <code>square.length; // 1</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Array</h2>
+        <ul>
+            <li>Специальный Object</li>
+            <li>Можно добавлять любые свойства (в том числе нечисловые)</li>
+            <li><code>.push()</code>, <code>.pop()</code>, <code>.join()</code>, ...</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Пример</h2>
+        <pre>
+            <code>typeof [] === <mark>"object"</mark>; // !</code>
+            <code>var a = [1, 2, 3, 4];</code>
+            <code>a[2] *= 2;</code>
+            <code>a.length; // 4</code>
+            <code>a + ""; // "1,2,6,4"</code>
+            <code>a['attr'] = "ok";</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Операторы и блоки</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Операторы и блоки</h2>
+        <ul>
+            <li>Expression: выражение, оператор</li>
+            <li>Statement: блок, блочное выражение</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Statement</h2>
+        <ul>
+            <li>Блочное выражение: <code>if() {}</code>, <code>try{} catch(e){}</code>, <code style="white-space: nowrap;">function a() {}</code></li>
+            <li>Директива интерпретатору: <code>return</code>, <code>throw</code>, <code>continue</code>, <code>var</code>, ...</li>
+            <li>Может включать выражения (expression) и другие блочные выражения (statements)</li>
+            <li><strong>Не возвращает значение</strong></li>
+            <li>Не может быть аргументом для Expression</li>
+        </ul>
+        <p class="note"><a href="http://es5.github.com/#x12">http://es5.github.com/#x12</a></p>
+    </div></section>
+    <section class="slide slide-nopage"><div>
+        <h2>Expression</h2>
+        <ul style="margin-bottom: 10px;">
+            <li>Оператор:
+                <ol>
+                    <li>с одним аргументом: <code>typeof</code>, <code>new</code>, <code>!</code>, <code>++</code>, <code>+</code>, ...</li>
+                    <li>с двумя: <code>==</code>, <code>===</code>, <code>instanceof</code>, <code>+</code>, <code>-</code></li>
+                    <li>с тремя: <code>a ? b : c</code> (тернарный оператор)</li>
+                    <li>вызов функции и запятая</li>
+                </ol>
+            </li>
+            <li>Может включать другие операторы</li>
+            <li>Не может включать Statement</li>
+            <li><strong>Возвращает значение</strong></li>
+        </ul>
+        <p class="note"><a href="http://es5.github.com/#x12">http://es5.github.com/#x11</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Приведение типов</h2>
+        <ul>
+            <li>Неявная (утиная) типизация</li>
+            <li>Зависит от оператора (особенно, <code>+</code> и сравнение)</li>
+            <li>Зависит от типа аргументов</li>
+        </ul>
+        <p class="note"><a href="http://javascript.ru/ecma/part9">http://javascript.ru/ecma/part9</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Оператор "+"</h2>
+        <pre>
+            <code>"1" + 2; // "12"</code>
+            <code>2 + 2; // 4</code>
+            <code>"1" + {}; // "1[object Object]"</code>
+            <code>[] + []; // ""</code>
+            <code>[1] + [2]; // "12"</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Операторы "==" и "==="</h2>
+        <p style="font-size: 80%; margin-bottom: 5px;">The Abstract Equality Comparison Algorithm <a href="http://es5.github.com/#x11.9.3">http://es5.github.com/#x11.9.3</a></p>
+        <pre class="smaller" style="font-size: 70%; margin-bottom: 10px;">
+            <code style=" line-height: 20px;">'' == '0'           // false</code>
+            <code style=" line-height: 20px;">'' ==  0            // <mark>true</mark></code>
+            <code style=" line-height: 20px;">0  == '0'           // <mark>true</mark></code>
+            <code style=" line-height: 20px;">false == undefined  // false</code>
+            <code style=" line-height: 20px;">false == null       // false</code>
+            <code style=" line-height: 20px;">null == undefined   // false</code>
+        </pre>
+        <p style="font-size: 80%; margin-bottom: 5px;">The Strict Equality Comparison Algorithm <a href="http://es5.github.com/#x11.9.3">http://es5.github.com/#x11.9.6</a></p>
+        <pre class="smaller" style="font-size: 70%; margin-bottom: 10px;">
+            <code style=" line-height: 20px;">'' === '0'          // false</code>
+            <code style=" line-height: 20px;">'' ===  0           // false</code>
+            <code style=" line-height: 20px;">0  === '0'          // false</code>
+            <code style=" line-height: 20px;">false === undefined // false</code>
+            <code style=" line-height: 20px;">false === null      // false</code>
+            <code style=" line-height: 20px;">null === undefined  // false</code>
+        </pre>
+        <p class="note"><a href="http://zero.milosz.ca">http://zero.milosz.ca</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Оператор var</h2>
+        <ul>
+            <li>Statement</li>
+            <li>Объявляет переменную в текущей области видимости</li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Оператор var</h2>
+        <pre>
+            <code>function A() {</code>
+            <code>  // i уже существует</code>
+            <code>  console.log(i); // undefined</code>
+            <code>  i = 5;</code>
+            <code>  for (<mark>var i = 0</mark>; i &lt; 10; i++) {</code>
+            <code>      console.log(i);</code>
+            <code>  }</code>
+            <code>}</code>
+            <code>A();</code>
+            <code>console.log(i); // <span style="color: red;">Reference error: i is not defined</span></code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Оператор var</h2>
+        <pre>
+            <code>function A() {</code>
+            <code>  <mark>var i;</mark></code>
+            <code>  console.log(i); // undefined</code>
+            <code>  i = 5;</code>
+            <code>  for (<mark>i = 0</mark>; i &lt; 10; i++) {</code>
+            <code>      console.log(i);</code>
+            <code>  }</code>
+            <code>}</code>
+            <code>A();</code>
+            <code>console.log(i); // <span style="color: red;">Reference error: i is not defined</span></code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Оператор delete</h2>
+        <ul>
+            <li>Expression</li>
+            <li>Удаляет ссылку на объект, а не сам объект</li>
+            <li>Не меняет прототип объекта</li>
+            <li>Некоторые свойства нельзя удалять (в спецификации они отмечены как <code>DontDelete</code>)</li>
+            <li>Возвращает <code>true</code>, если ссылка удалилась, <code>false</code> - если нет.</li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Оператор delete</h2>
+        <pre>
+            <code>var x = 42;</code>
+            <code>var obj = {k: 3, m: 5};</code>
+            <code>delete x; // <mark>false</mark>, так как var имеет флаг DontDelete</code>
+            <code>delete obj.k; // <mark>true</mark></code>
+            <code>delete Math.PI; // <mark>false</mark>, DontDelete</code>
+            <code>function Foo() {};</code>
+            <code>Foo.prototype.bar = 100;</code>
+            <code>var foo = new Foo();</code>
+            <code>delete foo.bar; // ничего не сделает</code>
+            <code>console.log(foo.bar); // 100</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Оператор delete</h2>
+        <pre>
+            <code>var arr = [1, 2, 3, 4, 5];</code>
+            <code>delete arr[1]; // true</code>
+            <code>arr.length; // <mark>5</mark>!!</code>
+            <code>arr[1]; // undefined</code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Оператор typeof</h2>
+        <ul>
+            <li>Expression, возвращающий String
+                <ol>
+                    <li>ссылка не достижима (IsUnresolvableReference) - "undefined"</li>
+                    <li>иначе по таблице</li>
+                </ol>
+            </li>
+        </ul>
+        <table class="tbl">
+            <tbody><tr>
+                <th>Тип</th>
+                <th>Результат</th>
+            </tr>
+            <tr>
+                <td>Undefined</td>
+                <td>"undefined"</td>
+            </tr>
+            <tr>
+                <td>Null</td>
+                <td><code>"object"</code></td>
+            </tr>
+            <tr>
+                <td>Boolean</td>
+                <td>"boolean"</td>
+            </tr>
+            <tr>
+                <td>Number</td>
+                <td>"number"</td>
+            </tr>
+            <tr>
+                <td>String</td>
+                <td>"string"</td>
+            </tr>
+            <tr>
+                <td>Function</td>
+                <td>"function"</td>
+            </tr>
+            <tr>
+                <td>Любой другой объект</td>
+                <td>"object"</td>
+            </tr>
+            </tbody>
+        </table>
+        <p class="note"><a href="http://es5.github.com/#x11.4.3">http://es5.github.com/#x11.4.3</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Примеры</h2>
+        <pre>
+            <code>typeof [] === "object"; // <mark>!!!</mark></code>
+            <code>typeof null === "object"; // <mark>!!!</mark></code>
+            <code>typeof NaN === "number"; // <mark>!!!</mark></code>
+            <code>typeof Infinity === "number";</code>
+            <code>// Проверка на массив</code>
+            <code>object.constructor === Array // true</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Операторы "&&" и "||"</h2>
+        <ul>
+            <li>|| - логическое "или"
+                <ol>
+                    <li>если первый аргумент <code>true</code>, то возвращаем его</li>
+                    <li>иначе возвращаем/выполняем второй</li>
+                </ol>
+            </li>
+            <li>&& - логическое "и"
+                <ol>
+                    <li>если первый аргумент <code>false</code>, то возвращаем его</li>
+                    <li>иначе возвращаем/выполняем второй</li>
+                </ol>
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Использование</h2>
+        <pre>
+            <code>function test(data) {</code>
+            <code>  data = data || {}; // <span style="color: green;">устанавливаем значение по умолчанию</span></code>
+            <code>  data.name = data.name || 'Default';</code>
+            <code>}</code>
+            <code>var a = true;</code>
+            <code>if (a) {</code>
+            <code>  alert('passed');</code>
+            <code>}</code>
+            <code>// или </code>
+            <code>a && alert('passed'); // <span style="color: red;">Запись неявная, плохой стиль</span></code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Оператор "void"</h2>
+        <ul>
+            <li>Вычисляет выражение и возвращает <code>undefined</code></li>
+        </ul>
+        <pre>
+            <code>void 0; // undefined</code>
+            <code>void (0); // undefined</code>
+            <code>void 4+7; // NaN - тоже самое, что (void 4) + 7</code>
+            <code>var x;</code>
+            <code>x = 3;</code>
+            <code>void(x = 5);</code>
+            <code>x; // 5</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Циклы</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Циклы</h2>
+        <ul>
+            <li>Циклы <code>for</code>, <code>while</code>, <code>do while</code> работают также, как и в других языках</li>
+            <li><code>for in</code>
+            <ol>
+                <li>итерация по перечисляемым свойствам объекта</li>
+                <li>в том числе и по свойствам прототипа</li>
+                <li><b>перечисляемость</b> - скрытое свойство</li>
+            </ol>
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Пример for in</h2>
+        <pre>
+            <code>var obj = {</code>
+            <code>  a: 1,</code>
+            <code>  b: {},</code>
+            <code>  c: 'test'</code>
+            <code>};</code>
+            <code>for (var key in obj) {</code>
+            <code>  console.log(key + ": " + obj[key]);</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Результат</h2>
+        <pre>
+            <code>a: 1</code>
+            <code>b: [object Object]</code>
+            <code>c: test</code>
+        </pre>
+
+        <pre>
+            <code>typeof obj.toString === "function"; // ???</code>
+            <code>typeof obj.hasOwnProperty === "function"; // ???</code>
+        </pre>
+
+        <p>Эти свойства являются неперечисляемыми</p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Другой пример</h2>
+        <pre>
+            <code>var Foo = function () {};</code>
+            <code>Foo.prototype.someValue = 123;</code>
+            <code>var foo = new Foo();</code>
+            <code>foo.a = 1;</code>
+            <code>foo.b = {};</code>
+            <code>foo.c = 'test';</code>
+            <code>for (var key in obj) {</code>
+            <code>  console.log(key + ": " + foo[key]);</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Результат</h2>
+        <pre>
+            <code>a: 1</code>
+            <code>b: [object Object]</code>
+            <code>c: test</code>
+            <code><mark>someValue: 123 // перечисляемое, но не собственное</mark></code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>hasOwnProperty</h2>
+        <pre style="margin-top: -10px;">
+            <code>var Foo = function () {};</code>
+            <code>Foo.prototype.someValue = 123;</code>
+            <code>var foo = new Foo();</code>
+            <code>foo.a = 1;</code>
+            <code>foo.b = {};</code>
+            <code>foo.c = 'test';</code>
+            <code>for (var key in foo) {</code>
+            <code>  if (<mark>foo.hasOwnProperty(key)</mark>) {</code>
+            <code>      console.log(key + ": " + foo[key]);</code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Результат</h2>
+        <pre>
+            <code>a: 1</code>
+            <code>b: [object Object]</code>
+            <code>c: test</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Functions</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Функция (Function)</h2>
+        <p> &mdash; это объект (Object) с внутренним (скрытым) методом [[Call]]</p>
+        <pre class="smaller">
+            <code>var func = new Function("x", "y", "return x * y;");</code>
+            <code>typeof func; // "function"</code>
+            <code>func(2, 3); // 6</code>
+            <code>&nbsp;</code>            
+            <code>var sum = function(x, y) { return x + y; }</code>
+            <code>sum(2, 2); // 4</code>
+        </pre>
+        <p class="note"><a href="http://es5.github.com/#x13.2.1">http://es5.github.com/#x13.2.1</a></p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Function declaration / definition</h2>
+        <ul>
+            <li>Statement</li>
+            <li>Инициализируется во время входа в контекст</li>
+            <li>Объявляется в блоке функций или в глобальном блоке</li>
+        </ul>
+        <pre class="smaller" style="margin-top: -20px;">
+            <code><mark>a();</mark> // ok</code>
+            <code>function a() {</code>
+            <code>  <mark>b();</mark> // ok</code>
+            <code>  function b() {</code>
+            <code>  }</code>
+            <code>}</code>
+            <code>a();</code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Conditional Function Declaration</h2>
+        <ul style="margin-top: -30px;">
+            <li>тоже Statement</li>
+            <li>Инициализируется во время входа в контекст или в рантайме</li>
+            <li style="color: red;">По стандарту такая запись недопустима</li>
+        </ul>
+        <pre class="smaller" style="margin-top: -40px;">
+            <code>if (true) {</code>
+            <code>  function a() {</code>
+            <code>      return 1;</code>
+            <code>  }</code>
+            <code>} else {</code>
+            <code>  function a() {</code>
+            <code>      return 2;</code>
+            <code>  }</code>
+            <code>}</code>
+            <code>a(); // FF - 1, Chrome - 2</code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Function Expression</h2>
+        <ul>
+            <li>это Expression</li>
+            <li>Инициализируется в рантайме</li>
+            <li>Объявляется где угодно</li>
+        </ul>
+        <pre class="smaller">
+            <code>a(); // <span style="color: red;">Error!</span></code>
+            <code>var a = function() {</code>
+            <code>      return 1;</code>
+            <code>}</code>
+            <code>a(); // ok</code>
+        </pre>
+        <p class="note"><a href="http://es5.github.com/#x11.2.5">http://es5.github.com/#x11.2.5</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Named Function Expression</h2>
+        <ul>
+            <li>тот же Function Expression</li>
+            <li>Можно обращаться к себе по своему же имени</li>
+            <li>Имя доступно только в своем блоке (кроме старых IE)</li>
+        </ul>
+        <pre class="smaller">
+            <code>(function timer() {</code>
+            <code>  setTimeout(timer, 1000);</code>
+            <code>  console.log(new Date());</code>
+            <code>}());</code>
+            <code>typeof timer; // undefined, old IE - function</code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>IEFE – Замыкание, Модуль</h2>
+        <ul>
+            <li>тот же Function Expression</li>
+            <li>даем понять интерпретатору, что этот код - Function Expression</li>
+            <li>IEFE позволяет эмулировать блочную область видимости</li>
+        </ul>
+        <pre class="smaller" style="margin-bottom: 10px;">
+            <code>function (){}(); // <span style="color: red;">Syntax error</span></code>
+            <code>(function () { // ok</code>
+            <code>  var b = Math.sin(Math.PI / 3);</code>
+            <code>  alert(b * 2);</code>
+            <code>}());</code>
+            <code>typeof b === "undefined";</code>
+        </pre>
+        <p class="note"><a href="http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/">http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/</a></p>
+    </div></section>
+
+
+    <section class="slide"><div>
+        <h2>Область видимости</h2>
+        <ul>
+            <li>Определяется во время создания функции</li>
+            <li>Не меняется при передаче функции</li>
+            <li>Образует цепочку областей видимости</li>
+            <li>Образует "замыкание"</li>
+        </ul>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Область видимости</h2>
+        <pre class="smaller">
+            <code><mark>var a = 1;</mark></code>
+            <code>function foo() {</code>
+            <code>  <mark>var c = 2;</mark></code>
+            <code>  function bar(e) {</code>
+            <code>      return <mark>a + c + e</mark>;</code>
+            <code>  }</code>
+            <code>  return bar(<mark>3</mark>);</code>
+            <code>}</code>
+            <code>foo(); // 6</code>
+        </pre>
+        <p class="note"><a href="http://es5.github.com/#x10.2">http://es5.github.com/#x10.2</a><br><a href="http://es5.github.com/#x10.3">http://es5.github.com/#x10.3</a></p>
+    </div></section>
+
+    <section class="slide cover"><div>
+        <h2 style="text-align: right;">Цепочка областей видимости</h2>
+        <img src="pictures/chain.png" alt="" style="max-width: 100%;">
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2 style="font-size: 150%;">Вся эта цепочка остается в памяти, пока жива функция bar()</h2>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Пример</h2>
+        <pre class="smaller">
+            <code>// замыкание</code>
+            <code>var getMySecret = (function () {</code>
+            <code>  // Это значение нельзя изменить</code>
+            <code>  var mySecret = Math.sin(Math.PI / 3);</code>
+            <code>  return function () {</code>
+            <code>      return mySecret;</code>
+            <code>  };</code>
+            <code>}())</code>
+            <code>getMySecret(); // 0.8660254037844386</code>
+            <code>typeof mySecret === "undefined";</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Вызов функции и контекст выполнения (this)</h2>
+        <ul>
+            <li>Прямой вызов</li>
+            <li>Вызов через оператор . и []</li>
+            <li>Вызов через <b>call</b>, <b>apply</b>, изменение контекста через <b>bind</b></li>
+            <li>Вызов через оператор <b>new</b></li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2 style="font-size: 200%;"><b>this</b> определяется <b>во время вызова функции</b></h2>
+        <p class="note"><a href="http://es5.github.com/#x11.2.3">http://es5.github.com/#x11.2.3</a></p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Прямой вызов</h2>
+        <ul>
+            <li>this <b>всегда undefined</b>, но он трансформируется в global</li>
+            <li>В строгом режиме <b>всегда undefined</b> (трансформации нет)</li>
+        </ul>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>function a() {</code>
+            <code>  console.log(this);</code>
+            <code>}</code>
+            <code>a(); // <mark>window (undefined -> window)</mark></code>
+            <code>function b() {</code>
+            <code>  "use strict";</code>
+            <code>  console.log(this);</code>
+            <code>}</code>
+            <code>b(); // <mark>undefined</mark></code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Прямой вызов через оператор . и []</h2>
+        <p style="margin-top: -30px;"><b>this</b> – объект, от которого был получена эта функция</p>
+        </ul>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>var foo = {</code>
+            <code>  bar: function() {</code>
+            <code>      console.log(this);</code>
+            <code>  }</code>
+            <code>};</code>
+            <code>foo.bar(); // <mark>foo</mark></code>
+            <code>var baz = {};</code>
+            <code>baz.bar = foo.bar;</code>
+            <code>baz.bar(); // <mark>baz</mark></code>
+            <code>var fooBar = foo.bar;</code>
+            <code>fooBar(); // ???</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2 style="font-size: 200%;">Что находится до точки &mdash; является this</h2>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Call, apply</h2>
+        <ul style="margin-top: -30px;">
+            <li>это способ управлять контекстом выполнения функции (<b>this</b>)</li>
+            <li>func.<b>call</b>(thisArg[, arg1[, arg2[, ...]]])</li>
+            <li>func.<b>apply</b>(thisArg[, argsArray])</li>
+        </ul>
+        <p><b>thisArg</b> &mdash; значение <b>this</b>, с которым будет вызвана функция.</p>
+        <p>В нестрогом режиме <code>null</code> и <code>undefined</code> будут преобразованы в global object (window), примитивы &mdash; в классы-врапперы.</p>
+        <p class="note"><a href="http://es5.github.com/#x15.3.4.3">http://es5.github.com/#x15.3.4.3</a>, <a href="http://es5.github.com/#x15.3.4.4">http://es5.github.com/#x15.3.4.4</a></p>
+    </div></section>
+    
+    <section class="slide slide-nopage"><div>
+        <h2>Примеры</h2>
+        <pre>
+            <code>var a = function (a, b) {</code>
+            <code>  console.log(this, a, b);</code>
+            <code>};</code>
+            <code>a(1, 2); // <mark>// window, undefined, undefined</mark></code>
+            <code>a.call([]); <mark>// [], undefined, undefined</mark></code>
+            <code>a.call(100500, 1, 2);<mark>// Number, 1, 2</mark></code>
+            <code>a.apply([], [1, 2]);<mark>// [], 1, 2</mark></code>
+            <code>var obj = {};</code>
+            <code>Array.prototype.push.call(obj, 1, 2, 3, 4, 5); // ???</code>            
+        </pre>
+    </div></section>        
+
+    <section class="slide slide-nopage"><div>
+        <h2>Bind</h2>
+        <ul style="margin-top: -30px;">
+            <li>это способ подменить <b>this</b> без вызова функции</li>
+            <li>func.<b>bind</b>(thisArg[, arg1[, arg2[, ...]]])</li>
+        </ul>
+        
+        <p style="margin-top: -40px;">Создает новую (bound) функцию с тем же телом (внутренним [[Call]]), что и у функции, у которой вызывается метод bind, со значением this равным первому аргументу.</p>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>var a = function() {</code>
+            <code>  console.log(this);</code>
+            <code>};</code>
+            <code>var b = a.bind({'a': 1});</code>
+            <code>b();<mark>// {'a': 1}</mark></code>
+        </pre>
+
+        <p class="note" style="margin-top: -30px;"><a href="http://es5.github.com/#x15.3.4.5">http://es5.github.com/#x15.3.4.5</a></p>
+    </div></section>
+    
+    <section class="slide slide-nopage"><div>
+        <h2>Bind / примеры</h2>
+        <pre>
+            <code>var mul = function(a, b) {</code>
+            <code>  return a * b;</code>
+            <code>};</code>
+            <code>mul(3, 3); // 9</code>
+            <code>var double = mul.bind(null, 2); // Карринг!</code>
+            <code>double(3); // <mark>6</mark></code>
+            <code>double(); // ;-)</code>
+        </pre>    
+    </div></section>
+    
+    <section class="slide slide-nopage"><div>
+        <h2>Bind</h2>
+        <pre>
+            <code>function bind(method, context) {</code>
+            <code>    var args = Array.prototype.slice.call(arguments, 2);</code>
+            <code>    return function() {</code>
+            <code>        var a = args.concat(</code>
+            <code>              Array.prototype.slice.call(arguments, 0)</code>
+            <code>        );</code>
+            <code>        return method.apply(context, a);</code>
+            <code>    };</code>
+            <code>}</code>
+        </pre>
+    </div></section> 
+<!-- 
+    <section class="slide"><div>
+        <h2>Вызов функции и this</h2>
+        <ul>
+            <li>Прямой вызов</li>
+            <li>Вызов через оператор "." и []</li>
+            <li>Вызов через new</li>
+            <li>Вызов через call, apply, bind</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2 style="font-size: 180%;"><b>this</b> определяется <b>во время вызова функции</b></h2>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Прямой вызов через оператор ()</h2>
+        <ul>
+            <li>() – это оператор вызова функции</li>
+            <li>this <b>всегда undefined</b>, но он трансформируется в global</li>
+            <li>В строгом режиме <b>всегда undefined</b> (трансформации нет)</li>
+        </ul>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>function a() {</code>
+            <code>  console.log(this);</code>
+            <code>}</code>
+            <code>a(); // <mark>window (undefined -> window)</mark></code>
+            <code>function b() {</code>
+            <code>  "use strict";</code>
+            <code>  console.log(this);</code>
+            <code>}</code>
+            <code>b(); // <mark>undefined</mark></code>
+        </pre>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Прямой вызов через оператор . и []</h2>
+        <ul style="margin-top: -30px;">
+            <li>Expression</li>
+            <li>this – объект от которого был получена эта функция</li>
+        </ul>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>var foo = {</code>
+            <code>  bar: function() {</code>
+            <code>      console.log(this);</code>
+            <code>  }</code>
+            <code>};</code>
+            <code>foo.bar(); // <mark>foo</mark></code>
+            <code>var baz = {};</code>
+            <code>baz.bar = foo.bar;</code>
+            <code>baz.bar(); // <mark>baz</mark></code>
+            <code>var fooBar = foo.bar;</code>
+            <code>fooBar(); // ???</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2 style="font-size: 180%;">Что находится до точки &mdash; является this</h2>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Оператор new</h2>
+        <ul style="margin-top: -30px;">
+            <li>Expression</li>
+            <li><b>new</b> – это еще один способ вызова функции</li>
+            <li><b>Каждая</b> функция может быть конструктором</li>
+            <li>this – пустой объект со ссылкой на prototype вызываемой функции</li>
+        </ul>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>var A = function () {</code>
+            <code>  console.log(this);</code>
+            <code>  console.log(this.__proto__ === A.prototype);</code>
+            <code>};</code>
+            <code>new A(); // <mark>Object, true</mark></code>
+        </pre>
+
+        <p class="note"><a href="http://es5.github.com/#x11.2.2">http://es5.github.com/#x11.2.2</a></p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Call, apply</h2>
+        <ul style="margin-top: -30px;">
+            <li>Это способ управлять <b>this</b></li>
+            <li>this – <b>объект</b>, который передается первым аргументом</li>
+        </ul>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>var a = function (a, b) {</code>
+            <code>  console.log(this, a, b);</code>
+            <code>};</code>
+            <code>a.call([]); <mark>// [], undefined, undefined</mark></code>
+            <code>a.call([], 1, 2);<mark>// [], 1, 2</mark></code>
+            <code>a.apply([], [1, 2]);<mark>// [], 1, 2</mark></code>
+        </pre>
+
+        <p class="note"><a href="http://es5.github.com/#x15.3.4.3">http://es5.github.com/#x15.3.4.3</a><br><a href="http://es5.github.com/#x15.3.4.4">http://es5.github.com/#x15.3.4.4</a></p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>Bind</h2>
+        <ul style="margin-top: -30px;">
+            <li>Это способ подменять this без вызова функции</li>
+            <li>this – <b>объект</b>, который передается первым аргументом</li>
+        </ul>
+         <pre class="smaller" style="margin-top: -40px;">
+            <code>var a = function () {</code>
+            <code>  console.log(this);</code>
+            <code>};</code>
+            <code>var b = a.bind({});</code>
+            <code>b();<mark>// {}</mark></code>
+        </pre>
+
+        <p class="note"><a href="http://es5.github.com/#x15.3.4.5">http://es5.github.com/#x15.3.4.5</a></p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2 style="font-size: 150%;">Вызов функции: передача значений и arguments</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Передача значения в функцию</h2>
+        <ul>
+            <li>Значения передаются по ссылке</li>
+            <li>Можно менять «поля» переданного объекта</li>
+            <li>Примитив менять нельзя</li>
+            <li>Можно переписать ссылку без потери объекта</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>arguments</h2>
+        <ul>
+            <li>Как и this появляется при вызове</li>
+            <li>не Array (нельзя forEach, map, filter, можно - for () {})</li>
+            <li>Содержит список всех аргументов (arguments[0] и .length)</li>
+            <li>Содержит ссылку на текущую функцию (arguments.calle)</li>
+        </ul>
+        <p class="note"><a href="http://es5.github.com/#x10.6">http://es5.github.com/#x10.6</a></p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>arguments и формальные параметры</h2>
+        <p style="margin-bottom: 10px; margin-top: -30px;">Без строгого режима arguments связан с формальными параметрами. <br>При добавлении "use strict" эта связь отменяется</p>
+        <pre class="x-smaller" style="">
+            <code>function myFunction(a) {</code>
+            <code>  console.log(arguments<b>[0]</b>); // 1 - ok</code>
+            <code>  a = 8;</code>
+            <code>  console.log(arguments<b>[0]</b>); // <mark>8</mark> - ???</code>
+            <code>}</code>
+            <code>myFunction(1);</code>
+            <code>&nbsp;</code>
+            <code>function myFunctionStrict(a) {</code>
+            <code>  "use strict";</code>
+            <code>  console.log(arguments<b>[0]</b>); // 1 - ok</code>
+            <code>  a = 8;</code>
+            <code>  console.log(arguments<b>[0]</b>); // <mark>1</mark> - ok</code>
+            <code>}</code>
+            <code>myFunctionStrict(1);</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Домашнее задание</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Домашнее задание</h2>
+        <p><a href="https://github.com/glibin/hhschool-js-1">https://github.com/glibin/hhschool-js-1</a></p>
+        <p>Вся информация по домашнему заданию в файле README.md</p>
+    </div></section> -->
+
+	<section class="slide"><div>
+		<h2>JavaScript, лекция 1</h2>
+		<p>Виталий Глибин, HeadHunter</p>
+		<ul>
+			<li><a href="http://glibin.ru">glibin.ru</a></li>
+			<li><a href="mailto:glibin.v@gmail.com">glibin.v@gmail.com</a></li>
+		</ul>
+	</div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<!--<div class="progress"><div></div></div>-->
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2010–2013 Vadim Makeev — pepelsbey.net -->
+	<!-- Photos by John Carey — fiftyfootshadows.net -->
+</body>
+</html>

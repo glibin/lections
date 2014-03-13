@@ -1,0 +1,455 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Школа программистов HH - DOM, Events, Ajax</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/print.css" media="print">
+	<!--
+		To apply styles to the certain slides
+		set slide ID to get needed elements
+		-->
+	<style>
+		#Sugar h2 {
+			margin:65px 0 0;
+			color:#FFF;
+			text-align:center;
+            font-size: 70px;
+            text-shadow: 1px 1px 1px gray;
+			}
+        #Sugar, #You {
+            background-color: white;
+        }
+
+		#Picture h2 {
+			color:#FFF;
+			}
+
+        .caption h1 {
+            color: white;
+            text-shadow: none;/*0 1px 1px darkgray;*/
+        }
+
+        .caption p, .list .caption a {
+            color: white;
+        }
+
+        .slide pre code {
+            line-height: 45px;
+        }
+
+        .slide pre.smaller code {
+            line-height: 35px;
+        }
+
+        .slide pre.x-smaller code {
+            line-height: 25px;
+            font-size: 80%;
+        }
+
+        .slide p.note {
+            text-align: right;
+        }
+
+        .slide-nopage:after {
+            content: "";
+        }
+
+        table.tbl {
+            margin: 0;
+            padding: 0;
+            margin-top: -40px;
+        }
+
+        table.tbl td {
+            margin: 0;
+            padding: 3px;
+            line-height: 25px;
+        }
+
+        table.tbl th {
+            border-bottom: 1px solid gray;
+        }
+
+        table.tbl tr {
+            margin: 0;
+            padding: 0;
+        }
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>DOM, Events, Ajax</h1>
+		<p><a href="http://glibin.ru/">Виталий Глибин</a>, <a href="http://hh.ru">front-end разработчик в HeadHunter</a></p>
+	</header>
+    <section class="slide"><div>
+        <h2>Document Object Model</h2>
+        <p>&mdash; это программный интерфейс для HTML/XML-документов, который определяет логическую структуру документа и способ взаимодействия с ним.</p>
+        <ul>
+            <li>История связана с "войной браузеров"</li>
+            <li>Стандартизация началась после выхода ECMAScript</li>
+            <li>Имеет несколько уровней спецификации (текущий - 2)</li>
+        </ul>
+        <p class="note"><a href="http://reference.sitepoint.com/javascript/domcore">http://reference.sitepoint.com/javascript/domcore</a></p>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Документ - это дерево</h2>
+        <ul>
+            <li>Каждый html-тег &mdash; узел с типом "элемент"</li>
+            <li>Текст &mdash; узел типа "текст"</li>
+            <li>Атрибут &mdash; это тоже узел</li>
+            <li>И даже отступы между тегами - тоже узлы</li>
+            <li>Всего существует 12 типов узлов</li>
+            <li>element.nodeType</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Типы узлов</h2>
+        <img src="pictures/nodetypes.png" style="width: 100%;" />
+        <p class="note"><a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html">http://www.w3.org/TR/DOM-Level-2-Core/core.html</a></p>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Пример</h2>
+        <pre><code>&lt;html&gt;</code>
+            <code>    &lt;head&gt;</code>
+            <code>        &lt;title&gt;Hello, World!&lt;/title&gt;</code>
+            <code>    &lt;/head&gt;</code>
+            <code>    &lt;body&gt;</code>
+            <code>        &lt;h1&gt;Header text&lt;/h1&gt;</code>
+            <code>        &lt;a href="http://hh.ru"&gt;Click me&lt;/a&gt;</code>
+            <code>    &lt;/body&gt;</code>
+            <code>&lt;/html&gt;</code>
+        </pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Пример</h2>
+        <img src="pictures/dom.png" style="width: 100%;" />
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Что это дает?</h2>
+        <ul>
+            <li>Для манипуляций с DOM в браузере используется объект <b>document</b>.</li>
+            <li>Каждый DOM-элемент является объектом и предоставляет свойства для манипуляции своим содержимым, для доступа к родителям и потомкам.</li>
+            <li><b>document.documentElement</b>, в случае корректной html-страницы,  &mdash; <b>&lt;html&gt;</b> </li>
+            <li><b>document.body</b> &mdash; это <b>&lt;body&gt;</b></li>
+        </ul>        
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Ходить по дереву</h2>
+        <ul>
+            <li><b>childNodes</b> - все дочерние элементы</li>
+            <li><b>firstChild</b> и <b>lastChild</b> показывают на первый и последний дочерние элементы</li>
+            <li><b>parentNode</b> указываетна родителя</li>
+            <li><b>previousSibling</b> и <b>nextSibling</b> указывают на левого и правого братьев узла</li>
+        </ul>
+        <p class="note"><a href="http://jsfiddle.net/ZXU9G/">http://jsfiddle.net/ZXU9G/</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Свойства и атрибуты</h2>
+        <ul>
+            <li>У DOM-элементов в javascript есть свойства и атрибуты.</li>
+        </ul>
+        <pre>
+<code>var body = document.body;</code>
+<code>body.foo = 1;</code>
+<code>body.bar = {'a': 1};</code>
+</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Атрибуты</h2>
+        <ul class="slide-list-normal">
+            <li>setAttribute(name, value)</li>
+            <li>getAttribute(name)</li>
+            <li>hasAttribute(name)</li>
+            <li>removeAttribute(name)</li>
+        </ul>
+        <pre>
+<code>document.body.setAttribute('test', 123);</code>
+<code>document.body.getAttribute('test');</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Некоторые синхронизируются</h2>
+        <ul>
+            <li>id = getAttribute('id')</li>
+            <li>className = getAttribute('class')</li>
+            <li>style != getAttribute('style')</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Поиск элементов в DOM</h2>
+        <ul>
+            <li>getElementById</li>
+            <li>getElementsByTagName</li>
+            <li>getElementsByName (form, input, a, select, textarea)</li>
+        </ul>
+
+        <p>getElements.. возвращают live NodeList</p>
+        <p class="note"><a hre="http://jsfiddle.net/NLW8Q/">http://jsfiddle.net/NLW8Q/</a></p>
+    </div></section>
+
+	<section class="slide"><div>
+		<h2>А по классу?</h2>
+        <img src="pictures/byClassName.png" style="width: 100%;" />
+	</div></section>
+
+    <section class="slide"><div>
+        <h2>А все вместе?</h2>
+        <img src="pictures/querySelector.png" style="width: 100%;" />
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>querySelector/querySelectorAll</h2>
+        <pre><code>elementList = document.querySelectorAll(selectors);</code></pre>
+        <ul>
+            <li>возвращает NodeList (non-live)</li>
+            <li>не работает с CSS псевдоэлементами (::before, ::after)</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Итерация по NodeList</h2>
+        <pre>
+            <code>Array.prototype.forEach.call(
+    nodeList, 
+    function(element, index) { 
+        ...
+});</code>
+        </pre>
+        <p class="note">Или через старый добрый for</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Изменение</h2>
+        <ul>
+            <li>innerHTML</li>
+            <li>document.createElement</li>
+            <li>appendChild</li>
+            <li>insertBefore/insertAfter (parentElem.insertBefore(newElem, target))</li>
+            <li>removeChild</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>DOM Events</h2>
+    </div></section>
+
+    <section class="slide"><div align="center">
+        <img src="pictures/event-inheritance.svg" width="100%;">
+        <p class="note"><a href="http://www.w3.org/TR/DOM-Level-3-Events/#dom-event-architecture">http://www.w3.org/TR/DOM-Level-3-Events/#dom-event-architecture</a></p>
+    </div></section>
+
+    <section class="slide"><div align="center">
+        <img src="pictures/eventflow.svg" height="80%;">
+        <p class="note"><a href="http://www.w3.org/TR/DOM-Level-3-Events/#dom-event-architecture">http://www.w3.org/TR/DOM-Level-3-Events/#dom-event-architecture</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>addEventListener</h2>
+        <pre>
+        <code>target.addEventListener(type, listener[, useCapture]);</code>
+        <code>target.addEventListener(type, listener[, useCapture, 
+            wantsUntrusted  ]); // Gecko/Mozilla only</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>addEventListener / crossbrowser</h2>
+        <pre>
+        <code>function addEvent(elem, type, handler, useCapture) {</code>
+        <code>    if (elem.addEventListener){</code>
+        <code>        elem.addEventListener(type, handler, useCapture);</code>
+        <code>    } else {</code>
+        <code>        elem.attachEvent("on"+type, handler);</code>
+        <code>    }</code>
+        <code>}</code>
+        </pre>
+        <p class="note">У старых IE (&lt;9) нет стадии capture</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Управление</h2>
+        <ul>
+            <li>Event.bubbles</li>
+            <li>Event.stopPropagation() / event.cancelBubble=true для IE&lt;9</li>
+            <li>Event.preventDefault()</li>
+            <li>Event.target (srcElement для IE&lt;9)</li>
+        </ul>
+        <p class="note"><a href="http://jsfiddle.net/Ve9HG/">http://jsfiddle.net/Ve9HG/1/</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Создание событий</h2>
+        <pre>
+            <code>var e = document.createEvent("Event");</code>
+            <code>e.initEvent("myevent", false, false); // bubbles, cancelable</code>
+            <code>// var e = new Event('myevent');</code>
+            <code>var target = document.createElement("div");</code>
+            <code>target.addEventListener("myevent", function () {</code>
+            <code>    // ... do stuff</code>
+            <code>});</code>
+            <code>target.dispatchEvent(e);</code>
+        </pre>
+        <p class="note" style="margin-top: -25px;"><a href="https://developer.mozilla.org/en-US/docs/Web/API/document.createEvent#Notes">https://developer.mozilla.org/en-US/docs/Web/API/document.createEvent#Notes</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Удаление событий</h2>
+        <pre>
+            <code>target.removeEventListener(type, listener[, useCapture])</code>
+        </pre>
+        <p class="note" style="margin-top: -25px;"><a href="https://developer.mozilla.org/en-US/docs/Web/API/document.createEvent#Notes">https://developer.mozilla.org/en-US/docs/Web/API/document.createEvent#Notes</a></p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>AJAX</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>AJAX</h2>
+        <ul>
+            <li>XMLHttpRequest</li>
+        </ul>
+        <img src="pictures/ajax.png" style="width: 100%;" />
+        <p class="note"><a href="http://xmlhttprequest.ru/">http://xmlhttprequest.ru/</a></p>
+    </div></section>
+    
+    <section class="slide"><div>
+        <h2>XMLHttpRequest</h2>
+        <pre>
+<code>var xmlhttp = getXmlHttp();</code>
+<code>xmlhttp.open('GET', '/xhr/test.html', <mark>false</mark>);</code>
+<code>xmlhttp.send(null);</code>
+<code>if(xmlhttp.status == 200) {</code>
+<code>    alert(xmlhttp.responseText);</code>
+<code>}</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>XMLHttpRequest</h2>
+        <pre>
+<code>var xmlhttp = getXmlHttp()</code>
+<code>xmlhttp.open('GET', '/xhr/test.html', <mark>true</mark>);</code>
+<code>xmlhttp.onreadystatechange = function() {</code>
+<code>    if (xmlhttp.readyState == 4) {</code>
+<code>        if(xmlhttp.status == 200) {</code>
+<code>            alert(xmlhttp.responseText);</code>
+<code>        }</code>
+<code>    }</code>
+<code>};</code>
+<code>xmlhttp.send(null);</code></pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Cross domain :(</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>JSONP</h2>
+        <pre>
+<code>var script = document.createElement('script');</code>
+<code>script.type = 'text/javascript';</code>
+<code>script.src = 'http://example.com/data?callback=cb';</code>
+<code>document.getElementsByTagName('head')[0].appendChild(script);</code>
+</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Еще...</h2>
+        <ul>
+            <li>img</li>
+            <li>iframe</li>
+            <li>Flash</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>of CORS!</h2>
+        <p class="note"><a href="https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS">https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS</a></p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>CORS</h2>
+        <pre>
+<code>add_header 'Access-Control-Allow-Origin' $http_origin;</code>
+<code>add_header 'Access-Control-Allow-Credentials' 'true';</code>
+<code>add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';</code>
+<code>if ($request_method = 'OPTIONS') {</code>
+<code>        add_header 'Access-Control-Max-Age' 1728000;</code>
+<code>        add_header 'Content-Type' 'text/plain charset=UTF-8';</code>
+<code>        add_header 'Content-Length' 0;</code>
+<code>        return 204;</code>
+<code>}</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Хотеть!</h2>
+        <img src="pictures/cors.png" style="width: 100%;" />
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>CORS</h2>
+        <pre>
+<code>var xmlhttp = getXmlHttp();</code>
+<code>xmlhttp.open('GET', 'http://gameminer.ru/api/giveaways/coal', true);</code>
+<code><mark>xmlhttp.withCredentials = true;</mark></code>
+<code>xmlhttp.onreadystatechange = function() {</code>
+<code>    if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {</code>
+<code>        console.log(JSON.parse(xmlhttp.responseText));</code>
+<code>    }</code>
+<code>};</code>
+<code>xmlhttp.send(null);</code>
+        </pre>
+        <p class="note" style="margin-top: -25px;"><a href="http://jsfiddle.net/a6mLh/">http://jsfiddle.net/a6mLh/</a></p>
+    </div></section>
+
+    <section class="slide slide-nopage"><div>
+        <h2>POST?</h2>
+        <pre>
+<code>var xmlhttp = getXmlHttp();</code>
+<code>xmlhttp.open('POST', 'http://gameminer.ru/giveaway/enter/56d47e5ebb8d113aaafdc8d4aa8d1f85', true);</code>
+<code><mark>xmlhttp.withCredentials = true;</mark></code>
+<code>xmlhttp.onreadystatechange = function() {</code>
+<code>    if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {</code>
+<code>        console.log(JSON.parse(xmlhttp.responseText));</code>
+<code>    }</code>
+<code>};</code>
+<code>xmlhttp.send(null);</code>
+        </pre>
+        <p class="note" style="margin-top: -25px;"><a href="http://jsfiddle.net/a6mLh/">http://jsfiddle.net/a6mLh/</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>ВОУ ВОУ ПАЛЕХЧЕ!</h2>
+        <ul>
+            <li>Prototype</li>
+            <li>MooTools</li>
+            <li>jQuery</li>
+        </ul>
+    </div></section>
+
+	<section class="slide"><div>
+		<h2>DOM, Events, Ajax</h2>
+		<p>Виталий Глибин, HeadHunter</p>
+		<ul>
+			<li><a href="http://glibin.ru">glibin.ru</a></li>
+			<li><a href="mailto:glibin.v@gmail.com">glibin.v@gmail.com</a></li>
+		</ul>
+	</div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<!--<div class="progress"><div></div></div>-->
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2010–2013 Vadim Makeev — pepelsbey.net -->
+	<!-- Photos by John Carey — fiftyfootshadows.net -->
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Школа программистов HH - Web Security</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/print.css" media="print">
+	<!--
+		To apply styles to the certain slides
+		set slide ID to get needed elements
+		-->
+	<style>
+		#Sugar h2 {
+			margin:65px 0 0;
+			color:#FFF;
+			text-align:center;
+            font-size: 70px;
+            text-shadow: 1px 1px 1px gray;
+			}
+        #Sugar, #You {
+            background-color: white;
+        }
+
+		#Picture h2 {
+			color:#FFF;
+			}
+
+        .caption h1 {
+            color: white;
+            text-shadow: none;/*0 1px 1px darkgray;*/
+        }
+
+        .caption p, .list .caption a {
+            color: white;
+        }
+
+        .slide pre code {
+            line-height: 45px;
+        }
+
+        .slide pre.smaller code {
+            line-height: 35px;
+        }
+
+        .slide pre.x-smaller code {
+            line-height: 25px;
+            font-size: 80%;
+        }
+
+        .slide p.note {
+            text-align: right;
+        }
+
+        .slide-nopage:after {
+            content: "";
+        }
+
+        table.tbl {
+            margin: 0;
+            padding: 0;
+            margin-top: -40px;
+        }
+
+        table.tbl td {
+            margin: 0;
+            padding: 3px;
+            line-height: 25px;
+        }
+
+        table.tbl th {
+            border-bottom: 1px solid gray;
+        }
+
+        table.tbl tr {
+            margin: 0;
+            padding: 0;
+        }
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Web Security</h1>
+		<p><a href="http://glibin.ru/">Виталий Глибин</a>, <a href="http://hh.ru">front-end разработчик в HeadHunter</a></p>
+	</header>
+    <section class="slide cover"><div>
+        <img src="pictures/startup.jpg" style="width: 100%;" />
+        <h2>Успешный стартап</h2>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Забыли про безопасность</h2>
+        <ul>
+            <li>Потеряли базу данных, так как не делали бэкапы</li>
+            <li>База любимых клиентов стала общедоступной</li>
+            <li>Скачали сайт и сделали 100500 клонов</li>
+        </ul>
+    </div></section>
+    <section class="slide cover" style="background-image: url(pictures/food.jpg); background-repeat: no-repeat; background-position: center center;"><div>
+    </div></section>
+    
+    <section class="slide"><div>
+        <h2>Cross-site scripting (XSS)</h2>
+        <p>Внедрение кода, который будет выполнен при открытии пользователем страницы и взаимодействии с веб-сервером злоумышленника.</p>
+        <ul>
+            <li>Отраженные</li>
+            <li>Хранимые</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Отраженные XSS</h2>
+        <p>Пользователь переходит по специально подготовленной ссылке:</p>
+        <pre><code style="font-size: 80%;">http://example.com/search.php?q=&lt;script&gt;alert(document.cookie);&lt;/script&gt;</code></pre>
+        <p class="note">
+            <a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet">Cheat Sheet</a><br>
+            <a href="http://ha.ckers.org/xssAttacks.xml">XML ;-)</a>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Хранимые XSS</h2>
+        <p>Форумы, блоги и другие user-generated content сайты, когда код хранится на сервере.</p>
+        <p class="note">
+            <a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet">Cheat Sheet</a><br>
+            <a href="http://ha.ckers.org/xssAttacks.xml">XML ;-)</a>
+        </p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Каналы внедрения</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Отсутствие экранирования спецсимволов</h2>        
+        <pre>
+            <code>&lt;h2&gt;Вы искали: {{ query.q }}&lt;/h2&gt;</code>
+            <code>&lt;p&gt;Найдено: {{ results.total }}&lt;/p&gt;</code>
+            <code>&lt;input type="text" name="q" value="{{ query.q }}"&gt;</code>
+        </pre>  
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Как защищаться</h2>        
+        <ul>
+            <li>Не забывать экранировать пользовательский ввод</li>
+            <li>Лучше, по умолчанию, экранировать все (современные шаблонизаторы позволяют делать это "из коробки")</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Отсутствие фильтрации в разрешённых тегах</h2>        
+        <p>Например, сайт разрешает тег "a", но не фильтрует его атрибуты.<br>
+        В результате:
+        <pre><code>&lt;a href="javascript:DoSomething()"&gt;XSS&lt;/a&gt;</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Как защищаться</h2>        
+        <ul>
+            <li>Использовать проверенные библиотеки по фильтрации пользовательского ввода (lxml.html.clean, XSL)</li>
+            <li>Вместо html-разметки разрешать псевдо-разметку (bbcode, Markdown, etc.)</li>
+        </ul>
+    </div></section>
+
+
+    <section class="slide shout" style="background-image: url(pictures/sqlinj.jpg); background-repeat: no-repeat; background-position: center center;"><div>
+        <h2 style="color: white;">SQL Injection</h2>
+    </div></section>
+
+    
+    <section class="slide"><div>
+        <h2>SQL Injection</h2>
+        <p>Наиболее распространенная по типу экранированной XSS:</p>
+        <pre>
+            <code style="font-size: 80%;">http://example.com/users.php?q=a%27;DROP%20TABLE%20users;</code>
+            <code style="font-size: 80%;">// a';DROP TABLE users;</code>
+        </pre>
+        <pre>
+            <code style="font-size: 80%;">st = "SELECT * FROM users WHERE name ='" + $HTTP_REQUEST['q'] + "';"</code>
+            <code style="font-size: 80%;">// SELECT * FROM users WHERE name = 'a';DROP TABLE users;</code>
+        </pre>
+
+        <p class="note">
+            <a href="http://en.wikipedia.org/wiki/SQL_Injection">http://en.wikipedia.org/wiki/SQL_Injection</a>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Как защищаться</h2>        
+        <ul>
+            <li><b>Никогда</b> не вставлять параметры напрямую в запрос, а использовать prepared statements:</li>
+        </ul>
+        <pre>
+            <code>sql = "SELECT * FROM users WHERE name = %s"</code>
+            <code>result = cursor.execute(sql, user_name)</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Cross-site request forgery</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>CSRF</h2>
+        <p>Незаметно заставляем пользователя выполнить какое-либо действие на нужном сайте</p>
+        <pre>
+            <code style="font-size: 80%;">Eve: Hello Alice! Look here:</code>
+            <code style="font-size: 80%;">&lt;img src="http://bank.example.com/withdraw?</code>
+            <code style="font-size: 80%;">                  account=Alice&amp;amount=1000000&amp;for=Eve"&gt;</code>
+        </pre>
+        <p class="note">
+            <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">http://en.wikipedia.org/wiki/Cross-site_request_forgery</a>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>CSRF</h2>
+        <pre>
+            <code style="font-size: 80%;">&lt;form method="post" action="http://bank.example.com/withdraw"&gt;</code>
+            <code style="font-size: 80%;">&lt;button style="position: absolute; left:0; top: 0; </code>
+            <code style="font-size: 80%;">                  right: 0; bottom: 0; opacity: 0;"&gt;</code>
+            <code style="font-size: 80%;">...</code>
+            <code style="font-size: 80%;">&lt;form&gt;</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Как защищаться</h2>        
+        <p>К каждому POST запросу добавлять специальный xsrf token (есть во всех современных фреймворках).</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Пример реализации</h2>        
+        <pre style="margin-top: -20px;">
+            <code>if not hasattr(self, "_xsrf_token"):</code>
+            <code>  token = self.get_cookie("_xsrf")</code>
+
+            <code>  if not token:</code>
+            <code>      token = binascii.b2a_hex(uuid.uuid4().bytes)</code>
+            <code>      expires_days = 30 if self.current_user else None</code>
+            <code>      self.set_cookie("_xsrf", token, expires_days=expires_days)</code>
+            <code>      self._xsrf_token = token</code>
+            <code>return self._xsrf_token</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Пример реализации</h2>        
+        <pre style="margin-top: -20px;">
+            <code>def check_xsrf_cookie(self):</code>
+            <code>  token = self.get_argument("_xsrf", None)</code>
+            <code>  if not token:</code>
+            <code>      raise HTTPError(403, </code>
+            <code>             "'_xsrf' argument missing from POST")</code>
+            <code>  if self.xsrf_token != token:</code>
+            <code>      raise HTTPError(403, </code>
+            <code>             "XSRF cookie does not match POST argument")</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Пример реализации / верстка</h2>        
+        <pre style="margin-top: -20px;">
+            <code>def xsrf_form_html(self):</code>
+            <code>  return '&lt;input type="hidden" name="_xsrf" value="' + \</code>
+            <code>      escape.xhtml_escape(self.xsrf_token) + '"/&gt;'</code>
+        </pre>
+
+        <pre>
+            <code>&lt;form method="post"&gt;</code>
+            <code>{{ xsrf_form_html() }}</code>
+            <code>...</code>
+            <code>&lt;/form&gt;</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Еще немного</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>HTTPS</h2>
+        <p>С распросранением общедоступных WiFi сетей проблема безопасности более, чем актуальна.</p>
+        <p>Любой может взять FireSheep и прослушать всю сеть на роутере.</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Доступ к серверам</h2>
+        <p>FTP - зло.<br>
+        SSH по ключу с паролем - win.</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Администрирование серверов</h2>
+        <ul>
+            <li>Своевременно обновлять ПО (лучше даже подписаться на рассылки разработчиков)</li>
+            <li><b>Бэкапы</b></li>
+            <li>Firewall</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Не лениться</h2>
+    </div></section>
+
+	<section class="slide"><div>
+		<h2>Web Security</h2>
+		<p>Виталий Глибин, HeadHunter</p>
+		<ul>
+			<li><a href="http://glibin.ru">glibin.ru</a></li>
+			<li><a href="mailto:glibin.v@gmail.com">glibin.v@gmail.com</a></li>
+		</ul>
+	</div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<!--<div class="progress"><div></div></div>-->
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2010–2013 Vadim Makeev — pepelsbey.net -->
+	<!-- Photos by John Carey — fiftyfootshadows.net -->
+</body>
+</html>
