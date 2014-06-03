@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="427px" height="386px" viewBox="0 0 427 386" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.0.2 (7799) - http://www.bohemiancoding.com/sketch -->
+    <title>frontik_2</title>
+    <description>Created with Sketch.</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Request-Handler" sketch:type="MSLayerGroup" transform="translate(19.000000, 92.000000)">
+            <rect id="Rectangle-1" stroke="#979797" fill="#CACACA" sketch:type="MSShapeGroup" x="0" y="0" width="112" height="33" rx="8"></rect>
+            <text id="backend1" fill="#000000" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" sketch:alignment="middle">
+                <tspan x="29.9785156" y="21">backend1</tspan>
+            </text>
+        </g>
+        <g id="Request-Handler" sketch:type="MSLayerGroup" transform="translate(150.000000, 136.000000)">
+            <rect id="Rectangle-1" stroke="#979797" fill="#CACACA" sketch:type="MSShapeGroup" x="0" y="0" width="112" height="33" rx="8"></rect>
+            <text id="backend2" fill="#000000" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" sketch:alignment="middle">
+                <tspan x="29.9785156" y="21">backend2</tspan>
+            </text>
+        </g>
+        <g id="Request-Handler" sketch:type="MSLayerGroup" transform="translate(297.000000, 108.000000)">
+            <rect id="Rectangle-1" stroke="#979797" fill="#CACACA" sketch:type="MSShapeGroup" x="0" y="0" width="112" height="33" rx="8"></rect>
+            <text id="backend3" fill="#000000" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" sketch:alignment="middle">
+                <tspan x="29.9785156" y="21">backend3</tspan>
+            </text>
+        </g>
+        <g id="Postprocessors" sketch:type="MSLayerGroup" transform="translate(123.000000, 273.000000)">
+            <rect id="Rectangle-1" stroke="#979797" fill="#2783CD" sketch:type="MSShapeGroup" x="0" y="0" width="166" height="49" rx="8"></rect>
+            <text id="Templating" fill="#FFFFFF" sketch:type="MSTextLayer" font-family="Helvetica" font-size="14" font-weight="normal" sketch:alignment="middle">
+                <tspan x="49.1484375" y="30">Templating</tspan>
+            </text>
+        </g>
+        <path d="M206,240 L206,274" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M203,263.2 C204.05,266.98 204.95,270.22 206,274 C207.05,270.22 207.95,266.98 209,263.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <path d="M76,125 L76,236" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M73,225.2 C74.05,228.98 74.95,232.22 76,236 C77.05,232.22 77.95,228.98 79,225.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <path d="M207,322 L207,356" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M204,345.2 C205.05,348.98 205.95,352.22 207,356 C208.05,352.22 208.95,348.98 210,345.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <path d="M206,25 L206,59" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M203,48.2 C204.05,51.98 204.95,55.22 206,59 C207.05,55.22 207.95,51.98 209,48.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <text id="User-request" fill="#000000" sketch:type="MSTextLayer" font-family="Helvetica" font-size="14" font-weight="normal" sketch:alignment="middle">
+            <tspan x="167.427734" y="14">User request</tspan>
+        </text>
+        <text id="HTML/JSON" fill="#000000" sketch:type="MSTextLayer" font-family="Helvetica" font-size="14" font-weight="normal" sketch:alignment="middle">
+            <tspan x="166.331055" y="383">HTML/JSON</tspan>
+        </text>
+        <rect id="Rectangle-4" stroke="#979797" sketch:type="MSShapeGroup" x="2" y="58" width="423" height="181"></rect>
+        <path d="M354,141 L354,236.5" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M351,225.2 C352.05,228.98 352.95,232.22 354,236 C355.05,232.22 355.95,228.98 357,225.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <path d="M74,59 L74,92" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M71,81.2 C72.05,84.98 72.95,88.22 74,92 C75.05,88.22 75.95,84.98 77,81.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <path d="M206,58 L206,135.006493" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M203,124.2 C204.05,127.98 204.95,131.22 206,135 C207.05,131.22 207.95,127.98 209,124.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <path d="M206,170 L206,237.006493" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M203,226.2 C204.05,229.98 204.95,233.22 206,237 C207.05,233.22 207.95,229.98 209,226.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <path d="M354,59 L354,107" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        <path id="Line-decoration-1" d="M351,96.2 C352.05,99.98 352.95,103.22 354,107 C355.05,103.22 355.95,99.98 357,96.2" stroke="#979797" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"></path>
+        <text id="Request-Handler" fill="#000000" sketch:type="MSTextLayer" font-family="Helvetica" font-size="14" font-weight="normal" sketch:alignment="right">
+            <tspan x="317.938477" y="49">Request Handler</tspan>
+        </text>
+    </g>
+</svg>

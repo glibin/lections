@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Использование сервис-ориентированной архитектуры (SOA) для построения сложных веб проектов</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+    <style>
+        #Cover h2 {
+            margin:30px 0 0;
+            color:#FFF;
+            text-align:center;
+            font-size:70px;
+        }
+        #Cover p {
+            margin:10px 0 0;
+            text-align:center;
+            color:#FFF;
+            font-size:20px;
+        }
+        #Cover p a {
+            color:#FFF;
+            text-decoration: none;
+            background: none;
+        }
+
+        #Cover p a:visited {
+            text-decoration: none;
+        }
+        .hh:after {
+            content: " ";
+            position: absolute;
+            display: inline-block;
+            width: 32px;
+            height: 38px;
+            background-image: url(pictures/logo-hh.svg);
+            background-position: right 6px;
+            background-repeat: no-repeat;
+            /*background-size: 16px 16px;*/
+        }
+
+        .final {
+            color:#FFF;
+            font-size:20px;
+        }
+
+        .final h2 {
+            color:#FFF;
+        }
+
+        .final a {
+            color:#FFF;
+            text-decoration: none;
+            background: none;
+        }
+
+        .final a:visited {
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Использование SOA для построения сложных веб проектов</h1>
+		<p><a href="http://glibin.ru">Виталий Глибин</a>, <a href="http://hh.ru">HeadHunter</a></p>
+	</header>
+	<section class="slide cover" id="Cover"><div>
+		<h2>Использование SOA для построения сложных веб проектов</h2>
+		<p>Виталий Глибин, <a href="http://hh.ru" class="hh">HeadHunter</a></p>
+	</div></section>
+
+    <section class="slide shout"><div>
+        <h2>Что такое SOA?</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Обычный сайт (монолитная архитектура)</h2>
+        <div style="text-align: center">
+            <img src="pictures/typical.svg" alt="" style="width: 50%;">
+        </div>
+    </div></section>
+
+
+    <section class="slide"><div>
+        <h2>Проблемы</h2>
+        <ol>
+            <li>Один репозиторий, много разработчиков</li>
+            <li>Рост кодовой базы</li>
+            <li>Ограничения в использовании языка программирования</li>
+            <li>Внешние подрядчики</li>
+            <li>... to be counted</li>
+        </ol>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Сервис-ориентированная архитектура (SOA)</h2>
+        <p>модульный подход к разработке программного обеспечения, основанный на использовании распределённых, слабо связанных заменяемых компонентов со стандартизированными интерфейсами и протоколам взаимодействия.</p>
+        <p class="note">Источник: <a href="http://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%81-%D0%BE%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F_%D0%B0%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D1%83%D1%80%D0%B0">Wikipedia</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>SOA-based сайт</h2>
+        <div style="text-align: center">
+            <img src="pictures/soa.svg" alt="" style="width: 100%;">
+        </div>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Компонент системы в разработке</h2>
+        <ul>
+            <li>Один сервис - один репозиторий</li>
+            <li>Свобода выбора языка программирования</li>
+            <li>Возможность отдать на аутсорс</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Контролируемая деградация</h2>
+        <ul>
+            <li>Лучше показать часть информации, чем упасть с 500</li>
+            <li>Лучше показать самое важное за 100мс&mdash;1с, чем все за 10 секунд</li>
+        </ul>
+    </div></section>
+
+    <section class="slide cover"><div>
+        <img src="pictures/hhru.png" alt="" style="max-width: 100%">
+    </div></section>
+
+    <section class="slide cover"><div>
+        <img src="pictures/marked_hhru.png" alt="" style="max-width: 100%">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Почему это важно</h2>
+        <ul>
+            <li>47% людей ожидают, что страница будет загружаться менее двух секунд</li>
+            <li>40% закрывают страницу, если она загружается более трех секунд</li>
+            <li>52% считают важным скорость загрузки страницы</li>
+        </ul>
+        <p class="note">Источник: <a href="http://www.akamai.com/html/about/press/releases/2009/press_091409.html">Akamai</a></p>
+    </div></section>
+
+    <section class="slide cover" style="background-color: white;"><div>
+        <img src="pictures/down_session.png" alt="" style="margin-top: 50px; max-width: 100%">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Разные требования к сервисам</h2>
+        <ul>
+            <li>Не все сервисы должны работать под большой нагрузкой</li>
+            <li>Некоторые могут и "полежать"</li>
+            <li>Оптимизируем только там, где это нужно</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Виртуализация</h2>
+        <ul>
+            <li>На одной машине один сервис</li>
+            <li>Легче мониторить</li>
+            <li>Легче деплоить</li>
+            <li>Можно добавлять/удалять машины по необходимости</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Дополнительный слой кеширования</h2>
+        <div style="text-align: center">
+            <img src="pictures/soa_cache.svg" alt="" style="width: 80%;">
+        </div>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Много платформ</h2>
+        <div style="text-align: center">
+            <img src="pictures/platforms.svg" alt="" style="width: 80%;">
+        </div>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Проблемы</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Сеть</h2>
+        <ul>
+            <li>TCP / HTTP overhead</li>
+            <li>Задержки между виртуальными машинами (используем SR-IOV)</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Эксплуатация</h2>
+        <ul>
+            <li>Больше конфигов</li>
+            <li>Больше деплоя</li>
+            <li>Больше мониторинга</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Разработка</h2>
+        <ul>
+            <li>Стало проще?</li>
+            <li>Усложнение поддержки тестовых и development стендов</li>
+            <li>Был один лог - стало много</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Уникальный идентификатор запроса (request_id)</h2>
+        <ul>
+            <li>Генерируется на nginx (<a href="https://github.com/hhru/nginx_requestid">ngx_http_requestid_module</a>)</li>
+            <li>Пробрасывается http-заголовком (X-Request-Id) на все сервисы</li>
+            <li>Каждая запись в логе содержит request_id</li>
+            <li>Все логи сливаем на graylog2</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Немного про Python</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Frontik</h2>
+        <div style="text-align: center">
+            <img src="pictures/frontik.svg" alt="" style="width: 60%;">
+        </div>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Frontik</h2>
+<pre><code class="python">class Page(page.PageHandler):
+    @page.user_page(xsl='pages/index.xsl')
+    def get_page(self):
+        self.doc.put(
+            self.get_url('{}/resumes'.format(resumeHost)),
+            self.get_url('{}/negotiations'.format(negHost))
+        )</code></pre>
+    </div></section>
+
+    <section class="slide" style="text-align: center"><div>
+        <img src="pictures/debug.png" alt="" style="max-width: 100%;">
+    </div></section>
+
+    <section class="slide" style="text-align: center"><div>
+        <img src="pictures/debug_req.png" alt="" style="max-width: 100%;">
+    </div></section>
+
+    <section class="slide" style="text-align: center"><div>
+        <img src="pictures/debug_timing.png" alt="" style="max-width: 100%;">
+    </div></section>
+
+    <section class="slide" style="text-align: center"><div>
+        <img src="pictures/debug_xml.png" alt="" style="max-width: 100%;">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Frontik</h2>
+        <ul>
+            <li>Изначально был заточен под XML/XSLT (сейчас умеет и JSON)</li>
+            <li>Работает на нашей патченной Tornado 2.0 (<a href="https://github.com/hhru/tornado">https://github.com/hhru/tornado</a>)</li>
+            <li>Требует libcurl, собранный с c-ares (<a href="https://github.com/tornadoweb/tornado/pull/1017">https://github.com/tornadoweb/tornado/pull/1017</a>)</li>
+            <li>Мало документации и примеров</li>
+        </ul>
+        <p class="note" style="text-align: right;"><a href="https://github.com/hhru/frontik">https://github.com/hhru/frontik</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Что хотелось</h2>
+        <ul>
+            <li>Уменьшить количество многоуровневых запросов</li>
+            <li>Иметь бо&#769;льшую свободу в выборе шаблонизатора</li>
+            <li>Чтобы работало и на upstream Tornado</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Tortik</h2>
+    </div></section>
+
+    <section class="slide" style="text-align: center"><div>
+        <img src="pictures/tortik.svg" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Preprocessors</h2>
+        <ul>
+            <li>Набор асинхронных обработчиков (например, получение сессии)</li>
+            <li>Выполняются до начала выполнения обработчика запроса</li>
+        </ul>
+<pre style="margin-top: -50px;"><code class="python">def session(handler, callback):
+    def _session_callback(session):
+        handler.session = session
+        callback()
+    session_client.get_session(_session_callback, ...)</code>
+		</pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Preprocessors</h2>
+		<pre><code class="python">class MobilePageHandler(tortik.page.RequestHandler):
+    preprocessors = [
+        session,
+        pagedata
+    ]</code>
+		</pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Request Handler</h2>
+        <ul>
+            <li>Стандартные обработчики Tornado (get, post, ...) с @asynchronous</li>
+            <li>Выходные данные формируются через <code><nobr>self.add('name', data)</nobr></code> - аналог self.doc.put() во Frontik'е </li>
+            <li>Можно и сразу <code>self.complete({'name': data})</code></li>
+        </ul>
+		<pre style="margin-top: -60px;"><code class="python">def get(self):
+    self.add('server_time', int(time.time))
+    self.add('data', {...})
+    self.complete()
+</code></pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Postprocessors</h2>
+        <ul>
+            <li>Набор последовательных обработчиков над выходными данными</li>
+            <li>Выполняются после выполнения обработчика запроса (RequestHandler)</li>
+        </ul>
+		<pre style="margin-top: -40px;"><code class="python">def template(handler, data, callback):
+    out = template_engine.render(handler.template_name,
+                                 data=<mark>handler.get_data()</mark>)
+    callback(handler, out)
+</code></pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Postprocessors</h2>
+		<pre><code class="python">class MobilePageHandler(tortik.page.RequestHandler):
+    postprocessors = [
+        template,
+        translation
+    ]</code>
+		</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Отправка запросов на бэкенды</h2>
+<pre style="margin-top: 0px;"><code class="python">self.fetch_requests([
+    self.make_request(
+        name='vacancies',
+        method='GET',
+        full_url='https://api.hh.ru/vacancies/8252535'),
+        ...
+    ], callback=self.complete)</code>
+		</pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Отправка запросов на бэкенды</h2>
+		<pre>
+			<code class="python">self.fetch_requests([
+    ('vacancies', 'https://api.hh.ru/vacancies/8252535'),
+    ...
+], callback=_cb)
+            </code>
+		</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Отправка запросов на бэкенды</h2>
+		<pre><code class="python">def _cb():
+    response = self.responses['vacancies']
+    data = response.data # json или xml
+    # плюс автоматический
+    # self.add('vacancies', response.data)
+    self.complete()
+            </code>
+		</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Этапы обработки запроса</h2>
+        <ul>
+            <li>получение сессии</li>
+            <li>обработка запроса (отправка запросов на сервисы и т.п.)</li>
+            <li>шаблонизация</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Этапы обработки запроса</h2>
+		<pre><code class="python">handler.log.stage_started('render')
+# do some hard render stuff
+handler.log.stage_complete('render')
+        </code>
+		</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Этапы обработки запроса</h2>
+		<pre><code class="python">handler.fetch_requests(
+    ...
+    callback=_cb,
+    <mark>stage='session'</mark>
+)
+        </code>
+		</pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Этапы обработки запроса</h2>
+        <pre><code>MONIK handler=hhmobile.pages.Page method=GET code=200 <br>total=93 session=13.98 page=47.14 render=21.77 <br>translation=7.30</code></pre>
+        <img src="pictures/stages.png" style="max-width: 100%;" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Этапы обработки запроса</h2>
+        <pre><code>MONIK <mark>handler=hhmobile.pages.Page</mark> method=GET code=200 <br>total=93 session=13.98 page=47.14 render=21.77 <br>translation=7.30</code></pre>
+        <img src="pictures/stages.png" style="max-width: 100%;" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Этапы обработки запроса</h2>
+        <pre><code>MONIK handler=hhmobile.pages.Page <mark>method=GET code=200</mark> <br>total=93 session=13.98 page=47.14 render=21.77 <br>translation=7.30</code></pre>
+        <img src="pictures/stages.png" style="max-width: 100%;" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Этапы обработки запроса</h2>
+        <pre><code>MONIK handler=hhmobile.pages.Page method=GET code=200 <br><mark>total=93</mark> session=13.98 page=47.14 render=21.77 <br>translation=7.30</code></pre>
+        <img src="pictures/stages.png" style="max-width: 100%;" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Мониторинг</h2>
+        <img src="pictures/monik.png" style="max-width: 100%;" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Мониторинг</h2>
+        <img src="pictures/monik2.png" style="max-width: 100%;" alt="">
+    </div></section>
+
+    <section class="slide final" style="background: black;"><div>
+        <h2>Спасибо!</h2>
+        <p>
+            Виталий Глибин, <a href="http://hh.ru" class="hh">HeadHunter</a>
+            <br>
+            @glibin, <a href="http://glibin.ru">glibin.ru</a>
+        </p>
+        <a href="https://github.com/hhru/tortik" style="color: white;">https://github.com/hhru/tortik</a><br>
+        <a href="https://github.com/hhru/frontik" style="color: white;">https://github.com/hhru/frontik</a><br>
+    </div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<!--<div class="progress"><div></div></div>-->
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+    <link rel="stylesheet" href="highlight/default.min.css">
+    <script src="highlight/highlight.min.js"></script>
+
+    <script>hljs.tabReplace = '    ';hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
