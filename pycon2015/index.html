@@ -1,0 +1,504 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Изоморфные приложения и Python</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="styles/default.css">
+    <style>
+        #Cover h2 {
+            margin:30px 0 0;
+            color:#FFF;
+            text-align:center;
+            font-size:70px;
+        }
+
+        #Cover h3 {
+            margin-top: 20px;
+            color: #FFF;
+            text-align: left;
+            font-size: 42px;
+        }
+        #Cover p {
+            margin:10px 0 0;
+            text-align:left;
+            color:#FFF;
+            font-size:22px;
+        }
+        #Cover p a {
+            color:#FFF;
+            text-decoration: none;
+            background: none;
+        }
+
+        #Cover p a:visited {
+            text-decoration: none;
+        }
+
+        .slide.diagram {
+            background: #fff;
+        }
+
+        .huntflow-container {
+
+        }
+
+        .huntflow img {
+            /*vertical-align: middle;*/
+        }
+
+        .huntflow {
+            line-height: 24px;
+        }
+
+        .huntflow:after {
+            content: " ";
+            /*position: absolute;*/
+            display: inline-block;
+            width: 96px;
+            height: 24px;
+            background-image: url(pictures/hf-logo.svg);
+            /*background-position: right 0;*/
+            background-repeat: no-repeat;
+            /*background-size: 16px 16px;*/
+        }
+
+        .final {
+            color:#FFF;
+            font-size:20px;
+        }
+
+        .final h2 {
+            color:#FFF;
+        }
+
+        .final a {
+            color:#FFF;
+            text-decoration: none;
+            background: none;
+        }
+
+        .final a:visited {
+            text-decoration: none;
+        }
+
+
+    </style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Изоморфные приложения и Python</h1>
+		<p>Виталий Глибин, CTO Huntflow, Frontend Team Lead в &laquo;Программе Главбух&raquo;</p>
+	</header>
+    <section class="slide cover" id="Cover"><div>
+        <h2>Изоморфные приложения и Python</h2>
+        <h3>Виталий Глибин</h3>
+        <p>CTO @ <a href="https://huntflow.ru">Huntflow</a></p>
+        <p>Frontend Team Lead @ <a href="https://1pgb.ru">Программа Главбух</a></p>
+        <p>ex. Team Lead @ <a href="https://m.hh.ru">HeadHunter</a></p>
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Изоморфные приложения</h2>-->
+        <!--<p>Паттерн веб разработки, в котором один и тот же код используется как на сервере, так и на клиенте.</p>-->
+        <!--<p>Как правило, речь идет об использовании JavaScript.</p>-->
+    <!--</div></section>-->
+
+    <section class="slide shout"><div>
+        <h2>Причем тут Python?</h2>
+    </div></section>
+
+    <!--<section class="slide cover"><div>-->
+        <!--<img src="pictures/lections.jpg" alt="">-->
+    <!--</div></section>-->
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Когда-то давно...</h2>-->
+        <!--<ol>-->
+            <!--<li>Браузеры были слабые и неумелые</li>-->
+            <!--<li>Javascript был в зачаточном состоянии</li>-->
+            <!--<li>Frontend-разработчикам (на самом деле, верстальщикам) хватало проблем с совместимостью браузеров</li>-->
+        <!--</ol>-->
+    <!--</div></section>-->
+
+    <section class="slide cover diagram"><div>
+        <h2>Когда-то давно...</h2>
+        <img src="pictures/serverside_only.svg" alt="">
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Через какое-то время появился AJAX</h2>-->
+        <!--<p>Для ускорения работы сайта, части страницы подгружались динамически в виде готовых фрагментов HTML.</p>-->
+    <!--</div></section>-->
+
+    <section class="slide cover diagram"><div>
+        <h2>Через какое-то время появился AJAX</h2>
+        <img src="pictures/serverside_ajax.svg" alt="">
+    </div></section>
+
+    <section class="slide cover diagram"><div>
+        <h2>Потом решили еще ускориться</h2>
+        <img src="pictures/serverside_json.svg" alt="">
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Потом решили еще ускориться</h2>-->
+        <!--<ol>-->
+            <!--<li>Вместо фрагментов HTML с сервера получаем JSON, а отрисовываем на клиенте</li>-->
+            <!--<li>Часть шаблонов теперь на сервере, а часть &mdash; на клиенте</li>-->
+        <!--</ol>-->
+    <!--</div></section>-->
+
+    <!--<section class="slide shout"><div>-->
+        <!--<h2>SPA</h2>-->
+    <!--</div></section>-->
+
+    <section class="slide cover diagram"><div>
+        <h2>Single Page Application</h2>
+        <img src="pictures/serverside_spa.svg" alt="">
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Single Page Application</h2>-->
+        <!--<ol>-->
+            <!--<li>Все шаблоны, контроллеры, модели теперь на клиенте, а сервер предоставляет API для работы с данными.</li>-->
+            <!--<li>Как только все загрузилось, все работает супер быстро.</li>-->
+            <!--<li>Верстальщики становятся полноценными frontend-разработчиками :-)</li>-->
+        <!--</ol>-->
+    <!--</div></section>-->
+
+    <section class="slide shout"><div>
+        <h2>Проблемы</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Поисковые системы</h2>
+        <pre><code class="html">&#x3C;html&#x3E;
+    &#x3C;head&#x3E;...&#x3C;/head&#x3E;
+    &#x3C;body&#x3E;
+        &#x3C;div id=&#x22;app&#x22;&#x3E;&#x3C;/div&#x3E;
+        &#x3C;script src=&#x22;all-app-is-here.js&#x22;&#x3E;&#x3C;/script&#x3E;
+    &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Люди</h2>
+        <ol>
+            <li>Устройства без Javascript</li>
+            <li>Прокси-браузеры (Opera Mini, UC, Puffin)</li>
+        </ol>
+        <p class="note"><a href="http://sokr.me/lbr">http://sokr.me/lbr</a></p>
+    </div></section>
+
+    <section class="slide cover"><div>
+        <img src="pictures/meduza-mini.jpg" alt="">
+    </div></section>
+
+    <section class="slide cover diagram"><div>
+        <h2>Ajax crawling</h2>
+        <img src="pictures/ajax_crawling.svg" alt="">
+        <!--<p class="note"><a href="https://developers.google.com/webmasters/ajax-crawling/docs/specification">https://developers.google.com/webmasters/ajax-crawling/docs/specification</a></p>-->
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Ajax crawling</h2>-->
+        <!--<ol>-->
+            <!--<li>Робот заменяет в ссылках все после <b>#!</b> на <b>?_escaped_fragment_</b></li>-->
+            <!--<li>По полученной ссылке пытается получить данные с сервера</li>-->
+            <!--<li>Сервер должен поддерживать соответствующее состояние с данным <b><nobr>?_escaped_fragment_</nobr></b></li>-->
+        <!--</ol>-->
+        <!--&lt;!&ndash;<p class="note"><a href="https://developers.google.com/webmasters/ajax-crawling/docs/specification">https://developers.google.com/webmasters/ajax-crawling/docs/specification</a></p>&ndash;&gt;-->
+    <!--</div></section>-->
+
+    <section class="slide shout"><div>
+        <h2><a href="http://prerender.io" style="font-size: 80%">http://prerender.io</a></h2>
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Prerender.io</h2>-->
+        <!--<ol>-->
+            <!--<li>При наличии _escaped_fragment_ в запросе, перенаправляет запрос на сервис, который подгружает headless-браузер (PhantomJS), отрисовывает страницу с JS и отдает результат</li>-->
+            <!--<li>SaaS или можно поднять у себя (есть примеры для Django и Tornado)</li>-->
+            <!--<li>Решает проблему роботов, но не людей</li>-->
+        <!--</ol>-->
+        <!--<p class="note"><a href="http://prerender.io">http://prerender.io</a></p>-->
+    <!--</div></section>-->
+
+    <section class="slide"><div>
+        <h2>Долгая первоначальная загрузка</h2>
+        <ol>
+            <li>Пользователь какое-то время видит или белый экран, или спиннер загрузки</li>
+            <li>40% людей закрывают страницу, если она загружается более трех секунд</li>
+            <li>Амазон за каждые 100мс загрузки теряет 1% прибыли</li>
+        </ol>
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>В результате</h2>-->
+        <!--<ol>-->
+            <!--<li>На сервере все таки отрисовывать надо</li>-->
+            <!--<li>При этом хочется иметь отзывчивость и скорость SPA</li>-->
+        <!--</ol>-->
+    <!--</div></section>-->
+
+    <section class="slide shout"><div>
+        <h2>Как сделать хорошо?</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Новый мобильный сайт HeadHunter (2013–2014)</h2>
+        <ol>
+            <li>Python на сервере (frontik/tortik)</li>
+            <li>Основной функционал должен работать и без JavaScript</li>
+            <li>При этом сайт должен быть быстрым, модным, современным</li>
+        </ol>
+        <p class="note"><a href="https://m.hh.ru">https://m.hh.ru</a></p>
+    </div></section>
+
+    <section class="slide cover"><div>
+        <img src="pictures/hh_menu_small.jpg" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Меню</h2>
+        <pre><code class="html">&#x3C;div class=&#x22;menu-button&#x22;&#x3E;&#x3C;a href=&#x22;
+            {%- if data.is_menu %}
+                {{- data.backurl -}}
+            {% else -%}
+                /menu?backurl=...
+            {%- endif %}&#x22;
+            onclick=&#x22;toggleMenu();&#x22; ...&#x3E;&#x3C;/a&#x3E;&#x3C;/div&#x3E;
+        </code></pre>
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Новый мобильный сайт HeadHunter (2013–2014)</h2>-->
+        <!--<ol>-->
+            <!--<li>Начали смотреть в сторону совместимых шаблонизаторов</li>-->
+            <!--<li>Смотрели Mustache, Handlebars и другие</li>-->
+            <!--<li>Выбрали Jinja2 <-> Nunjucks</li>-->
+        <!--</ol>-->
+    <!--</div></section>-->
+
+    <section class="slide cover diagram"><div>
+        <h2>Единая шаблонизация</h2>
+        <img src="pictures/templating.svg" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Nunjucks &mdash; &laquo;Heavily inspired by&nbsp;jinja2&raquo; &copy;</h2>
+
+        <a href="http://mozilla.github.io/nunjucks/">http://mozilla.github.io/nunjucks/</a>
+        <!--<ol>-->
+        <!--<li></li>-->
+        <!--<li>Пришлось дописывать некоторые фильтры</li>-->
+        <!--</ol>-->
+        <!--<p class="note"></p>-->
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Почему единая шаблонизация?</h2>-->
+        <!--<ol>-->
+            <!--<li>Одни данные должны отражать одно и тоже состояние как на сервере, так и на клиенте</li>-->
+            <!--<li>Серверу неважно, какие обработчики событий навешаны на элементы, и как они должны работать – это задача клиента</li>-->
+            <!--<li>Клиент получает данные с сервера</li>-->
+        <!--</ol>-->
+    <!--</div></section>-->
+
+    <section class="slide"><div>
+        <h2>Список резюме (/applicant/resumes)</h2>
+        <pre><code class="python">class ResumesPage(page.PageHandler):
+    def get(self):
+        data = fetch_data_from_backends(...)
+        if is_json(self):
+            self.finish(data)
+        else:
+            self.render('pages/resumes.html', **data)
+    </code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>На клиенте</h2>
+        <pre><code class="javascript">route('/applicant/resumes').then(function () {
+    var collection = new Resumes.Collection({
+        url: '/applicant/resumes'});
+    collection.fetch().then(function (data) {
+        render('blocks/resumes.html', data);
+    });
+});
+        </code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Сервис для ведения вакансий Huntflow (2015)</h2>
+        <ol>
+            <li>Python на сервере (tortik)</li>
+            <li>Начали использовать такой же подход, как с мобильным HH</li>
+            <!--<li>Столкнулись с тем, что с усложением приложения, становится все тяжелее "восстанавливать" состояние на клиенте</li>-->
+        </ol>
+        <p class="note"><a href="https://huntflow.ru">https://huntflow.ru</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>На сервере (pages/resumes.html)</h2>
+        <pre><code class="django">{% extends "layout.html" %}
+{% block content %}
+    {% include 'blocks/resumes.html' %}
+{% endblock %}
+{% block scripts %}&#x3C;script&#x3E;
+    var ResumeListData = {{ data.resumes|json|safe }};
+&#x3C;/script&#x3E;{% endblock %}</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>blocks/resumes/item.html</h2>
+        <pre><code class="html">&#x3C;a data-resumes-id=&#x22;{{ item.id }}&#x22;&#x3E;
+    ...
+&#x3C;/a&#x3E;</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>blocks/resumes/item.js</h2>
+        <pre><code class="javascript">var el = $('[data-resumes-id="' + item.id + '"]')[0];
+var view = new ResumeView({el: el, model: item});
+if (!el) {
+    view.render();
+}
+</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Новый сайт GameMiner (2015–...)</h2>
+        <ol>
+            <li>Python на сервере (tortik)</li>
+            <li>Решили попробовать что-нибудь новое, модное, современное</li>
+        </ol>
+        <p class="note"><a href="http://gameminer.ru">http://gameminer.ru</a></p>
+    </div></section>
+
+    <section class="slide cover"><div>
+        <img src="pictures/frameworks.jpg" alt="">
+    </div></section>
+
+    <section class="slide cover"><div>
+        <img src="pictures/react.png" alt="">
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>React</h2>
+        <ol>
+            <li>Шаблонизатор (view)</li>
+            <li>Virtual DOM</li>
+            <li>Сам отвечает за восстановление состояния</li>
+            <li>Только на Javascript / NodeJS</li>
+        </ol>
+        <p class="note"><a href="https://facebook.github.io/react/">https://facebook.github.io/react/</a></p>
+    </div></section>
+
+    <!--<section class="slide shout"><div>-->
+        <!--<h2>SOA!</h2>-->
+    <!--</div></section>-->
+
+    <section class="slide"><div>
+        <h2>React as a service</h2>
+        <ol>
+            <li>Поднимаем отдельный сервис рендеринга на NodeJS</li>
+            <li>Если нужно отрисовать на сервере, отправляем данные в сервис, результат отдаем на клиент</li>
+            <li>На клиенте все работает</li>
+        </ol>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>React as a service</h2>
+        <pre><code class="python">class ResumesPage(page.PageHandler):
+    def get(self):
+        data = fetch_data_from_backends(...)
+        if is_json(self):
+            self.finish(data)
+        else:
+            html = react_render('App.jsx', data)
+            self.finish(html)
+        </code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>React as a service</h2>
+        <pre><code class="javascript">app.post('/render', (request, response) => {
+    let props = request.body.props || {};
+    let uri = request.body.uri;
+    render(props, uri, output =>
+            response.send(output));
+});
+        </code></pre>
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>React as a service</h2>-->
+        <!--<pre><code class="javascript">function render (props, uri, callback) {-->
+    <!--let router = Router.create({location: uri, routes: routes});-->
+    <!--router.run((Handler, state) => {-->
+        <!--const routeHandlerInfo = { state, flux, props };-->
+        <!--performRoute(state.routes,-->
+            <!--'routerWillRun', routeHandlerInfo).then(data => {-->
+                <!--callback(React.renderToString(...));-->
+            <!--});-->
+    <!--});-->
+<!--}-->
+
+        <!--</code></pre>-->
+    <!--</div></section>-->
+
+    <section class="slide"><div>
+        <h2>React as a service</h2>
+        <ol>
+            <li>Если ломается сервис, на клиенте продолжит работать</li>
+            <li>Есть небольшая задержка на tcp/http</li>
+        </ol>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Итого</h2>
+    </div></section>
+
+    <!--<section class="slide"><div>-->
+        <!--<h2>Выводы</h2>-->
+        <!--<ol>-->
+            <!--<li>Python стабильный и классный язык для сервера</li>-->
+            <!--<li>Не зависит от смены и сложности технологий на фронтенде</li>-->
+            <!--<li>Пишите на том, что любите ;-)</li>-->
+        <!--</ol>-->
+    <!--</div></section>-->
+
+    <section class="slide final" style="background: black;"><div>
+        <h2>Спасибо!</h2>
+        <p>
+            Виталий Глибин
+            <!--, <a href="https://huntflow.ru" class="huntflow"><img src="pictures/hf-logo.svg"></a>-->
+            <br>
+            @glibin, <a href="http://glibin.ru">glibin.ru</a>
+        </p>
+
+        <br>
+        Этот доклад: <a href="http://glibin.github.io/lections/pycon2015/" style="color: white;">
+            http://glibin.github.io/lections/pycon2015/
+        </a>
+        <br>
+        Tortik: <a href="http://glibin.github.io/lections/pycon2014/" style="color: white;">
+            http://glibin.github.io/lections/pycon2014/
+        </a>
+    </div></section>
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<!--<div class="progress"><div></div></div>-->
+	<script src="shower/shower.min.js"></script>
+    <script src="highlight.pack.js"></script>
+
+    <script>hljs.tabReplace = '    ';hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
